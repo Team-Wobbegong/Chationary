@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open 'Google Chrome' & nodemon server/server.js"
+    "start": "webpack serve --open Chrome.exe & nodemon server/server.js",
+    "startwin": "webpack serve --open Chrome.exe & nodemon server/server.js"
+
   },
   "repository": {
     "type": "git",
