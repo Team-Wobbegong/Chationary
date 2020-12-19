@@ -60,8 +60,16 @@ app.use((err, req, res, next) => {
 /**
  * start server
  */
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
+});
+
+// setup socket.io
+const socket = require('socket.io');
+const io = socket(server);
+io.on('connection', (socket) => {
+  console.log('a connection is made');
+  console.log('backendid-->', socket.id);
 });
 
 module.exports = app;

@@ -1,12 +1,18 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import { MenuItems } from './MenuItems';
 import NavDropdown from './NavDropdown';
 import useToggle from './useToggle';
+import { io } from 'socket.io-client';
 
 export default function MainNav() {
   const [dropdown, setDropdown] = useToggle(false);
-
+  useEffect(() => {
+    const socket = io('http://localhost:8080/');
+    socket.on('connect', () => {
+      console.log('iddddd->', socket.id);
+    });
+  });
   return (
     <nav className='MainNav'>
       <div className='title'>
