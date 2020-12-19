@@ -6,19 +6,20 @@
     height: 20vh;
 }
 
-
+.title{
+    display: flex;
+    align-items: center;
+}
 
 .MainNav ul{
     display:flex;
-   
+    align-items: center;
 
 }
 
 .MainNav-item{
     color:  black;
-    list-style: none;
-    text-align: center;
-    margin-top: 25px;
+    list-style: none;   
     margin-left: 15px
 }
 

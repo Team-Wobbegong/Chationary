@@ -5,13 +5,17 @@ import { MenuItems } from './MenuItems';
 export default function MainNav() {
   return (
     <nav className='MainNav'>
-      <img
-        className='logo'
-        src='https://icon-library.com/images/chatroom-icon/chatroom-icon-24.jpg'
-        height='100px'
-        width='100px'
-        alt='chatroom-logo'
-      />
+      <div className='title'>
+        <p>Chationary</p>
+        <img
+          className='logo'
+          src='https://icon-library.com/images/chatroom-icon/chatroom-icon-24.jpg'
+          height='100px'
+          width='100px'
+          alt='chatroom-logo'
+        />
+      </div>
+
       <ul>
         {MenuItems.map((item, idx) => {
           return (
