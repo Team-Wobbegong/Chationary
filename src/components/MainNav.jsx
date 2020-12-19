@@ -29,7 +29,7 @@ export default function MainNav() {
               <>
                 <li
                   className='MainNav-item'
-                  key={`menuitem ${idx}`}
+                  key={`menuitem-${idx}`}
                   onClick={setDropdown}
                 >
                   <Link to={item.link} style={{ textDecoration: 'none' }}>
@@ -41,7 +41,7 @@ export default function MainNav() {
             );
           }
           return (
-            <li className='MainNav-item' key={`menuitem ${idx}`}>
+            <li className='MainNav-item' key={`menuitem-${idx}`}>
               <Link to={item.link} style={{ textDecoration: 'none' }}>
                 {item.itemName}
               </Link>
