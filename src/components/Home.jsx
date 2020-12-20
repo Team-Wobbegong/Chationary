@@ -5,11 +5,7 @@ import { Chatrooms } from './Chatrooms';
 const Home = () => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-
-  // console.log(
-  //   Chatrooms.filter((chatroom) => chatroom.roomName === room)[0].link
-  // );
-
+  
   return (
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">
@@ -39,7 +35,7 @@ const Home = () => {
         <>
           <Link
             onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-            to={`/chat?name=${name}&room=${room.toLocaleLowerCase()}`}
+            to={`/chat/${name}/${room}`}
           >
             <button className={'button'} type="submit">
               Join

@@ -24,22 +24,22 @@ export default function MainNav() {
 
       <ul>
         {MenuItems.map((item, idx) => {
-          if (idx === 1) {
-            return (
-              <>
-                <li
-                  className="MainNav-item"
-                  key={`menuitem-${idx}`}
-                  onClick={setDropdown}
-                >
-                  <Link to={item.link} style={{ textDecoration: 'none' }}>
-                    {item.itemName} <i className="fas fa-caret-down" />
-                  </Link>
-                  {dropdown ? <NavDropdown /> : null}
-                </li>
-              </>
-            );
-          }
+          // if (idx === 1) {
+          //   return (
+          //     <>
+          //       <li
+          //         className="MainNav-item"
+          //         key={`menuitem-${idx}`}
+          //         onClick={setDropdown}
+          //       >
+          //         <Link to={item.link} style={{ textDecoration: 'none' }}>
+          //           {item.itemName} <i className="fas fa-caret-down" />
+          //         </Link>
+          //         {dropdown ? <NavDropdown /> : null}
+          //       </li>
+          //     </>
+          //   );
+          // }
           return (
             <li className="MainNav-item" key={`menuitem-${idx}`}>
               <Link to={item.link} style={{ textDecoration: 'none' }}>
