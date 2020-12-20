@@ -32,8 +32,9 @@ app.use(express.static(path.join(__dirname, '../src')));
  * define route handlers
  */
 // ********** This is just for testing only! Please change **********
-app.use('/api', (req, res) => {
-  return res.status(200).send(req.body);
+
+app.get('/user', (req, res) => {
+  res.send({ response: 'Server is up and running.' }).status(200);
 });
 
 // catch-all route handler for any requests to an unknown route
@@ -60,8 +61,27 @@ app.use((err, req, res, next) => {
 /**
  * start server
  */
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
+});
+
+/**
+ * setup socket
+ */
+const socketio = require('socket.io');
+const io = socketio(server);
+
+io.on('connection', (socket) => {
+  console.log('We have a new connection!');
+
+  socket.on('join', ({ name, room }) => {
+    console.log('name => ', name, 'room => ', room);
+    console.log('Backend socket.id => ', socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User had left!');
+  });
 });
 
 module.exports = app;

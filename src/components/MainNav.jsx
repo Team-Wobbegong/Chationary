@@ -11,6 +11,11 @@ export default class MainNav extends Component {
         <ul>
           <li>Chatrooms</li>
           <li>
+            <Link to="/Chat" className="navbar" id="nav">
+              Chat
+            </Link>
+          </li>
+          <li>
             <Link to="/en" className="navbar" id="nav2">
               English
             </Link>

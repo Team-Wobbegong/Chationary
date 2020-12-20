@@ -1,5 +1,3 @@
-@import '_app';
+@import '_App';
+@import '_Home';
 
-body {
-  color: purple;
-}

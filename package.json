@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://localhost:3000",
+  "secure": false,
   "scripts": {
     "start": "webpack serve --open 'Google Chrome' & nodemon server/server.js",
     "startwin": "webpack serve --open Chrome.exe & nodemon server/server.js"
@@ -42,9 +44,13 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "socket.io": "^3.0.4",
+    "socket.io-client": "^3.0.4"
   }
 }
