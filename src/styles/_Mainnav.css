@@ -1,0 +1,27 @@
+.MainNav{
+    display: flex;
+    justify-content: space-between;
+   
+    background:	rgb(255, 102, 102);
+    height: 20vh;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+}
+
+.MainNav ul{
+    display:flex;
+    align-items: center;
+
+}
+
+
+
+.MainNav-item{
+    color:  black;
+    list-style: none;   
+    margin-left: 15px
+}
+

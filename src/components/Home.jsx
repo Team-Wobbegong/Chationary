@@ -22,7 +22,7 @@ const Home = () => {
             placeholder="Room"
             className="homeInput"
             type="text"
-            onChange={(event) => setRoom(event.target.value)}
+            onChange={(e) => setRoom(e.target.value)}
           />
         </div>
         <Link
