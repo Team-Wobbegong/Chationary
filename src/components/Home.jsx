@@ -1,38 +1,51 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Chatrooms } from './Chatrooms';
 
 const Home = () => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 
+  // console.log(
+  //   Chatrooms.filter((chatroom) => chatroom.roomName === room)[0].link
+  // );
+
   return (
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">
-        <h1 className="heading">Join</h1>
-        <div>
+        <h1 className="heading">Welcome</h1>
+        <>
           <input
             placeholder="Name"
             className="homeInput"
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
-        </div>
-        <div>
-          <input
-            placeholder="Room"
+        </>
+        <>
+          <select
             className="homeInput"
-            type="text"
+            value={room}
             onChange={(e) => setRoom(e.target.value)}
-          />
-        </div>
-        <Link
-          onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-          to={`/chat?name=${name}&room=${room}`}
-        >
-          <button className={'button'} type="submit">
-            Sign In
-          </button>
-        </Link>
+          >
+            <option>Choose A Chatroom</option>
+            {Chatrooms.map((room, idx) => (
+              <option key={`room-${idx}`} value={room.roomName}>
+                {room.roomName}
+              </option>
+            ))}
+          </select>
+        </>
+        <>
+          <Link
+            onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+            to={`/chat?name=${name}&room=${room.toLocaleLowerCase()}`}
+          >
+            <button className={'button'} type="submit">
+              Join
+            </button>
+          </Link>
+        </>
       </div>
     </div>
   );
