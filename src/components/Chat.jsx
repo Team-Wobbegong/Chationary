@@ -15,12 +15,12 @@ const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    console.log('useEffect is fired!');
+    console.log('useEffect fired!');
 
     socket = io(endpoint);
     // Add callback?
     socket.emit('join', { name, room });
-
+    console.log('frontend emitting message to backend');
     return () => {
       // // BAD, will throw an error?
       // socket.emit('disconnect');
@@ -29,6 +29,7 @@ const Chat = ({ match }) => {
   }, [endpoint, name, room]);
 
   useEffect(() => {
+    console.log('receiving message from the backend socket');
     socket.on('message', (message) => {
       setMessages((messages) => [...messages, message]);
     });

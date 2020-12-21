@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Chatrooms } from './Chatrooms';
+import useInputState from './useInputState';
 
 const Home = () => {
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
+  const [name, handleChangeName, resetName] = useInputState('');
+  const [room, handleChangeRoom, resetRoom] = useInputState('');
 
   return (
-    <div className="homeOuterContainer">
-      <div className="homeInnerContainer">
-        <h1 className="heading">Welcome</h1>
+    <div className='homeOuterContainer'>
+      <div className='homeInnerContainer'>
+        <h1 className='heading'>Welcome</h1>
         <>
           <input
-            placeholder="Name"
-            className="homeInput"
-            type="text"
-            onChange={(e) => setName(e.target.value)}
+            placeholder='Name'
+            className='homeInput'
+            type='text'
+            onChange={handleChangeName}
           />
         </>
         <>
           <select
-            className="homeInput"
+            className='homeInput'
             value={room}
-            onChange={(e) => setRoom(e.target.value)}
+            onChange={handleChangeRoom}
           >
             <option>Choose A Chatroom</option>
             {Chatrooms.map((room, idx) => (
@@ -33,11 +34,12 @@ const Home = () => {
           </select>
         </>
         <>
-          <Link
-            onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-            to={`/chat/${name}/${room}`}
-          >
-            <button className={'button'} type="submit">
+          <Link to={`/chat/${name}/${room}`}>
+            <button
+              onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+              className={'button'}
+              type='submit'
+            >
               Join
             </button>
           </Link>

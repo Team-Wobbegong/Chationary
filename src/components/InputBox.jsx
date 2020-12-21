@@ -4,6 +4,12 @@ import useInputState from './useInputState';
 const InputBox = () => {
   const [newMessage, handleNewMessage, resetNewMessage] = useInputState('');
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    resetNewMessage();
+    console.log('the link is clicked');
+  };
+
   return (
     <div className='form'>
       <input
@@ -13,7 +19,7 @@ const InputBox = () => {
         value={newMessage}
         onChange={handleNewMessage}
       />
-      <button className='sendButton' onClick={resetNewMessage}>
+      <button className='sendButton' onClick={handleClick}>
         Send
       </button>
     </div>

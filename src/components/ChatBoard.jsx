@@ -5,7 +5,7 @@ import Chat from './Chat';
 export default class ChatBoard extends Component {
   render() {
     return (
-      <div>
+      <div className='ChatBoard'>
         This is our ChatBoard Component
         <API />
         <Chat />
