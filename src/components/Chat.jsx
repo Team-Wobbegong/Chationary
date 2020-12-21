@@ -11,7 +11,7 @@ const endpoint = 'localhost:8080';
 const Chat = ({ match }) => {
   const { name, room } = match.params;
   // console.log(match.params);
-  const [newMessage, setNewMessage] = useState('');
+
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -36,11 +36,11 @@ const Chat = ({ match }) => {
   });
 
   return (
-    <div className="chatOuterContainer">
-      <div className="chat">
+    <div className='chatOuterContainer'>
+      <div className='chat'>
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
-        <InputBox newMessage={newMessage} setNewMessage={setNewMessage} />
+        <InputBox />
       </div>
     </div>
   );

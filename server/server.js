@@ -72,7 +72,7 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 io.on('connection', (socket) => {
-  console.log('socket => ', socket);
+  //console.log('socket => ', socket);
   console.log('socket.id => ', socket.id);
 
   // Add callback?
