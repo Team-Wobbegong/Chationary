@@ -77,14 +77,20 @@ io.on('connection', (socket) => {
 
   // Add callback?
   socket.on('join', ({ name, room }) => {
+    console.log('name,room===>', name, room);
     socket.emit('message', {
       user: 'admin',
       text: `${name}, welcome to ${room} chatroom.`,
     });
 
-    console.log('Before joining the room => ', socket.rooms);
-    socket.join(room);
-    console.log('After joining the room => ', socket.rooms);
+    socket.on('chatMessage', function (data) {
+      console.log('date==>', data);
+      io.sockets.emit('chatMessage', data);
+    });
+
+    // console.log('Before joining the room => ', socket.rooms);
+    // socket.join(room);
+    // console.log('After joining the room => ', socket.rooms);
   });
 
   socket.on('disconnect', () => {

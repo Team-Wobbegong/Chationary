@@ -1,11 +1,18 @@
 import React from 'react';
 import useInputState from './useInputState';
 
-const InputBox = () => {
+const InputBox = ({ socket, name }) => {
+  console.log('socket===>', socket);
   const [newMessage, handleNewMessage, resetNewMessage] = useInputState('');
 
   const handleClick = (e) => {
     e.preventDefault();
+    //emit message
+    socket.emit('chatMessage', {
+      user: name,
+      text: newMessage,
+    });
+
     resetNewMessage();
     console.log('the link is clicked');
   };

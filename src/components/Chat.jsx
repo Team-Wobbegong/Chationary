@@ -34,6 +34,10 @@ const Chat = ({ match }) => {
       setMessages((messages) => [...messages, message]);
     });
     // figure out what to listen ???
+
+    socket.on('chatMessage', function (data) {
+      setMessages([...messages, data]);
+    });
   });
 
   return (
@@ -41,7 +45,7 @@ const Chat = ({ match }) => {
       <div className='chat'>
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
-        <InputBox />
+        <InputBox socket={socket} name={name} />
       </div>
     </div>
   );
