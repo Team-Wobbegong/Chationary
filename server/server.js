@@ -72,11 +72,13 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 io.on('connection', (socket) => {
-  console.log('We have a new connection!');
-
   socket.on('join', ({ name, room }) => {
-    console.log('name => ', name, 'room => ', room);
-    console.log('Backend socket.id => ', socket.id);
+    socket.emit('message', {
+      user: 'admin',
+      text: `${name}, welcome to ${room} chatroom.`,
+    });
+
+    // socket.join(room);
   });
 
   socket.on('disconnect', () => {

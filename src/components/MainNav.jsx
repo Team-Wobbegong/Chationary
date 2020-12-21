@@ -16,8 +16,8 @@ export default function MainNav() {
         <img
           className="logo"
           src="https://icon-library.com/images/chatroom-icon/chatroom-icon-24.jpg"
-          height="100px"
-          width="100px"
+          height="80px"
+          width="80px"
           alt="chatroom-logo"
         />
       </div>

@@ -1,6 +1,11 @@
 @import '_App';
 @import '_Home';
-@import '_Mainnav';
+@import '_MainNav';
+@import '_Chat';
+@import '_InfoBar';
+@import '_Messages';
+@import '_Message';
+@import '_inputBox';
 
 * {
   box-sizing: border-box;

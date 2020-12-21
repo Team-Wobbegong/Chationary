@@ -5,7 +5,7 @@ import { Chatrooms } from './Chatrooms';
 const Home = () => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-  
+
   return (
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">

@@ -1,10 +1,10 @@
-
 .homeOuterContainer {
   display: flex;
   justify-content: center;
   text-align: center;
   height: 100vh;
   align-items: center;
+  background-color: #1a1a1d;
 }
 
 .homeInnerContainer {
@@ -12,7 +12,7 @@
 }
 
 .homeInput {
-  border: 1px solid black;
+  border: 1px solid #1a1a1d;
   border-radius: 0;
   padding: 15px 20px;
   width: 100%;
@@ -20,13 +20,13 @@
 }
 
 .heading {
-  color: black;
+  color: white;
   font-size: 2.5em;
   border-bottom: 2px solid white;
 }
 
 .button {
-  color: #fff;
+  color: white;
   text-transform: uppercase;
   text-decoration: none;
   background: #2979ff;
