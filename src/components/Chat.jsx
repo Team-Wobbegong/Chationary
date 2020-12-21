@@ -22,7 +22,8 @@ const Chat = ({ match }) => {
     socket.emit('join', { name, room });
 
     return () => {
-      socket.emit('disconnect');
+      // // BAD, will throw an error?
+      // socket.emit('disconnect');
       socket.off();
     };
   }, [endpoint, name, room]);
