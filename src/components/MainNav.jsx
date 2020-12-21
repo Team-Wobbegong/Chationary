@@ -42,7 +42,7 @@ export default function MainNav() {
           // }
           return (
             <li className="MainNav-item" key={`menuitem-${idx}`}>
-              <Link to={item.link} style={{ textDecoration: 'none' }}>
+              <Link to={item.link} >
                 {item.itemName}
               </Link>
             </li>

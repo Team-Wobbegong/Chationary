@@ -72,8 +72,10 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 io.on('connection', (socket) => {
+  console.log('socket => ', socket);
   console.log('socket.id => ', socket.id);
 
+  // Add callback?
   socket.on('join', ({ name, room }) => {
     socket.emit('message', {
       user: 'admin',
@@ -87,6 +89,8 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('User had left!');
+    // // How to use  socket.leave(room)??
+    // socket.leave(room);
   });
 });
 

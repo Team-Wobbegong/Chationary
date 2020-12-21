@@ -18,13 +18,13 @@ const Chat = ({ match }) => {
     console.log('useEffect is fired!');
 
     socket = io(endpoint);
-
+    // Add callback?
     socket.emit('join', { name, room });
 
     return () => {
       // // BAD, will throw an error?
       // socket.emit('disconnect');
-      socket.off();
+      // socket.off();
     };
   }, [endpoint, name, room]);
 
@@ -32,7 +32,8 @@ const Chat = ({ match }) => {
     socket.on('message', (message) => {
       setMessages((messages) => [...messages, message]);
     });
-  }, []);
+    // figure out what to listen ???
+  });
 
   return (
     <div className="chatOuterContainer">

@@ -20,6 +20,7 @@
 
 .MainNav a {
   color: white;
+  text-decoration: none;
 }
 
 .MainNav .logo {
