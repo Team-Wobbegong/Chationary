@@ -1,11 +1,9 @@
 import React from 'react';
-// import useInputState from './useInputState';
 
 const InputBox = ({
-  room,
   newMessage,
   setNewMessage,
-  handleSendMessage,
+  sendNewMessage,
   setTypingMsg,
 }) => {
   const handleKeyPress = (e) => {
@@ -16,17 +14,24 @@ const InputBox = ({
     }
   };
 
+    const handleSendMessage = (e) => {
+      console.log('handleSendMessage!');
+      e.preventDefault();
+      sendNewMessage(newMessage);
+      setNewMessage('');
+    };
+
   return (
-    <div className='form'>
+    <div className="form">
       <input
-        className='inputBox'
-        type='text'
-        placeholder='Type a message...'
+        className="inputBox"
+        type="text"
+        placeholder="Type a message..."
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
         onKeyPress={handleKeyPress}
       />
-      <button className='sendButton' onClick={handleSendMessage}>
+      <button className="sendButton" onClick={handleSendMessage}>
         Send
       </button>
     </div>

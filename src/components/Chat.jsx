@@ -16,23 +16,16 @@ const Chat = ({ match }) => {
   //console.log(setTypingMsg);
   const [newMessage, setNewMessage] = useState('');
 
-  const handleSendMessage = (e) => {
-    console.log('handleSendMessage!');
-    e.preventDefault();
-    sendNewMessage(newMessage);
-    setNewMessage('');
-  };
-
   return (
-    <div className='chatOuterContainer'>
-      <div className='chat'>
+    <div className="chatOuterContainer">
+      <div className="chatInnerContainer">
         <InfoBar room={room} />
         <Messages messages={messages} name={name} typeMsg={typeMsg} />
         <InputBox
           room={room}
           newMessage={newMessage}
           setNewMessage={setNewMessage}
-          handleSendMessage={handleSendMessage}
+          sendNewMessage={sendNewMessage}
           setTypingMsg={setTypingMsg}
         />
       </div>
