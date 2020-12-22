@@ -99,7 +99,8 @@ io.on('connection', (socket) => {
 
   socket.on('typing', (data) => {
     console.log('data-->', data);
-    socket.broadcast.emit('typingMsg', data);
+    socket.to(room).emit('typingMsg', data);
+    //socket.broadcast.to().emit has the same effect!!
   });
 
   socket.on('disconnect', () => {
