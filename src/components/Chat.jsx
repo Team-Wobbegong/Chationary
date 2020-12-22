@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Messages from './Messages';
 import InfoBar from './InfoBar';
@@ -14,7 +14,7 @@ const Chat = ({ match }) => {
   );
 
   //console.log(setTypingMsg);
-  const [newMessage, setNewMessage] = useState('');
+  // const [newMessage, setNewMessage] = useState('');
 
   return (
     <div className='chatOuterContainer'>
@@ -22,9 +22,9 @@ const Chat = ({ match }) => {
         <InfoBar room={room} />
         <Messages messages={messages} name={name} typeMsg={typeMsg} />
         <InputBox
-          room={room}
-          newMessage={newMessage}
-          setNewMessage={setNewMessage}
+          // room={room}
+          // newMessage={newMessage}
+          // setNewMessage={setNewMessage}
           sendNewMessage={sendNewMessage}
           setTypingMsg={setTypingMsg}
         />

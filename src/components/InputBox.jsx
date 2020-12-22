@@ -1,11 +1,14 @@
 import React from 'react';
+import useInputState from './useInputState';
 
 const InputBox = ({
-  newMessage,
-  setNewMessage,
+  // newMessage,
+  // setNewMessage,
   sendNewMessage,
   setTypingMsg,
 }) => {
+  const [newMessage, handleNewMessage, reset] = useInputState('');
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSendMessage(e);
@@ -18,7 +21,7 @@ const InputBox = ({
     console.log('handleSendMessage!');
     e.preventDefault();
     sendNewMessage(newMessage);
-    setNewMessage('');
+    reset();
   };
 
   return (
@@ -28,7 +31,7 @@ const InputBox = ({
         type='text'
         placeholder='Type a message...'
         value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
+        onChange={handleNewMessage}
         onKeyPress={handleKeyPress}
       />
       <button className='sendButton' onClick={handleSendMessage}>
