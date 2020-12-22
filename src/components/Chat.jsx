@@ -24,8 +24,8 @@ const Chat = ({ match }) => {
   };
 
   return (
-    <div className='chatOuterContainer'>
-      <div className='chat'>
+    <div className="chatOuterContainer">
+      <div className="chatInnerContainer">
         <InfoBar room={room} />
         <Messages messages={messages} name={name} typeMsg={typeMsg} />
         <InputBox
