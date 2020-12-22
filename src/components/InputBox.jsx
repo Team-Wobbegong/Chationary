@@ -1,25 +1,18 @@
 import React from 'react';
 import useInputState from './useInputState';
 
-const InputBox = () => {
-  const [newMessage, handleNewMessage, resetNewMessage] = useInputState('');
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    resetNewMessage();
-    console.log('the link is clicked');
-  };
-
+const InputBox = ({ newMessage, setNewMessage, handleSendMessage }) => {
   return (
-    <div className='form'>
+    <div className="form">
       <input
-        className='inputBox'
-        type='text'
-        placeholder='Type a message...'
+        className="inputBox"
+        type="text"
+        placeholder="Type a message..."
         value={newMessage}
-        onChange={handleNewMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        onKeyPress={(e) => (e.key === 'Enter' ? handleSendMessage(e) : null)}
       />
-      <button className='sendButton' onClick={handleClick}>
+      <button className="sendButton" onClick={handleSendMessage}>
         Send
       </button>
     </div>
