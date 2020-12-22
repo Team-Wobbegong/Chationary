@@ -97,6 +97,11 @@ io.on('connection', (socket) => {
     io.in(room).emit('message', message);
   });
 
+  socket.on('typing', (data) => {
+    console.log('data-->', data);
+    io.in(room).emit('typingMsg', data);
+  });
+
   socket.on('disconnect', () => {
     socket.leave(room);
     socket.to(room).emit('message', {

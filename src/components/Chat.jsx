@@ -8,25 +8,32 @@ import useSocket from './useSocket';
 const Chat = ({ match }) => {
   const { name, room } = match.params;
   // console.log(match.params);
-  const [messages, sendNewMessage] = useSocket(name, room);
+  const [messages, typeMsg, sendNewMessage, setTypingMsg] = useSocket(
+    name,
+    room
+  );
+
+  //console.log(setTypingMsg);
   const [newMessage, setNewMessage] = useState('');
 
   const handleSendMessage = (e) => {
-    console.log("handleSendMessage!")
+    console.log('handleSendMessage!');
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage('');
   };
 
   return (
-    <div className="chatOuterContainer">
-      <div className="chat">
+    <div className='chatOuterContainer'>
+      <div className='chat'>
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
+        <Messages messages={messages} name={name} typeMsg={typeMsg} />
         <InputBox
+          room={room}
           newMessage={newMessage}
           setNewMessage={setNewMessage}
           handleSendMessage={handleSendMessage}
+          setTypingMsg={setTypingMsg}
         />
       </div>
     </div>

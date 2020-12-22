@@ -6,6 +6,7 @@ const endpoint = 'localhost:8080';
 
 const useSocket = (name, room) => {
   const [messages, setMessages] = useState([]);
+  const [typeMsg, setTypeMsg] = useState(``);
 
   useEffect(() => {
     console.log('useEffect fired!');
@@ -19,7 +20,12 @@ const useSocket = (name, room) => {
     socket.on('message', (message) => {
       // console.log(message);
       setMessages((messages) => [...messages, message]);
-      // console.log('receiving message from the backend socket');
+    });
+    // console.log('receiving message from the backend socket');
+
+    socket.on('typingMsg', (data) => {
+      // console.log(message);
+      setTypeMsg(data);
     });
 
     // Destroys the socket reference
@@ -42,7 +48,11 @@ const useSocket = (name, room) => {
     }
   };
 
-  return [messages, sendNewMessage];
+  const setTypingMsg = () => {
+    socket.emit('typing', `${name} is typing...`);
+  };
+
+  return [messages, typeMsg, sendNewMessage, setTypingMsg];
 };
 
 export default useSocket;
