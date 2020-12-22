@@ -99,7 +99,7 @@ io.on('connection', (socket) => {
 
   socket.on('typing', (data) => {
     console.log('data-->', data);
-    io.in(room).emit('typingMsg', data);
+    socket.broadcast.emit('typingMsg', data);
   });
 
   socket.on('disconnect', () => {

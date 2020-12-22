@@ -18,6 +18,7 @@ const useSocket = (name, room) => {
 
     // Listens for incoming messages
     socket.on('message', (message) => {
+      setTypeMsg('');
       // console.log(message);
       setMessages((messages) => [...messages, message]);
     });
