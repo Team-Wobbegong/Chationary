@@ -7,6 +7,7 @@ const InputBox = ({
   sendNewMessage,
   setTypingMsg,
 }) => {
+  //added customized hook
   const [newMessage, handleNewMessage, reset] = useInputState('');
 
   const handleKeyPress = (e) => {
@@ -21,6 +22,7 @@ const InputBox = ({
     console.log('handleSendMessage!');
     e.preventDefault();
     sendNewMessage(newMessage);
+    //calling reset in the customized hook to set input to ''
     reset();
   };
 

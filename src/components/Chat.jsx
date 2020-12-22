@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Messages from './Messages';
 import InfoBar from './InfoBar';
 import InputBox from './InputBox';
