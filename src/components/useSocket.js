@@ -27,7 +27,7 @@ const useSocket = (name, room) => {
     return () => {
       socket.close();
     };
-  }, [endpoint, name, room]);
+  }, [name, room]);
 
   // client sends a message to the server
   // Server forwards it to all users in the same room

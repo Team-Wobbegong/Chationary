@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
 
   console.log('before joining room => socket.rooms => ', socket.rooms);
   socket.join(room);
-  console.log('before joining room => ', socket.rooms);
+  console.log('After joining room => ', socket.rooms);
 
   socket.emit('message', {
     id: socket.id,
