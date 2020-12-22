@@ -1,5 +1,18 @@
-@import '_app';
+@import '_Home';
+@import '_MainNav';
+@import '_Chat';
+@import '_InfoBar';
+@import '_Messages';
+@import '_Message';
+@import '_inputBox';
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  color: purple;
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
 }

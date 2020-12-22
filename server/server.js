@@ -32,8 +32,9 @@ app.use(express.static(path.join(__dirname, '../src')));
  * define route handlers
  */
 // ********** This is just for testing only! Please change **********
-app.use('/api', (req, res) => {
-  return res.status(200).send(req.body);
+
+app.get('/user', (req, res) => {
+  res.send({ response: 'Server is up and running.' }).status(200);
 });
 
 // catch-all route handler for any requests to an unknown route
@@ -60,8 +61,58 @@ app.use((err, req, res, next) => {
 /**
  * start server
  */
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
+});
+
+/**
+ * setup socket
+ */
+const socketio = require('socket.io');
+const io = socketio(server);
+
+io.on('connection', (socket) => {
+  console.log('socket.id => ', socket.id);
+  const { name, room } = socket.handshake.query;
+
+  console.log('before joining room => socket.rooms => ', socket.rooms);
+  socket.join(room);
+  console.log('After joining room => ', socket.rooms);
+
+  socket.emit('message', {
+    id: socket.id,
+    name: 'Admin',
+    room,
+    text: `${name}, welcome to ${room} chatroom.`,
+  });
+
+  socket.to(room).emit('message', {
+    id: socket.id,
+    name: 'Admin',
+    room,
+    text: `${name} has joined!`,
+  });
+
+  socket.on('sendNewMessage', (message) => {
+    io.in(room).emit('message', message);
+  });
+
+  socket.on('typing', (data) => {
+    console.log('data-->', data);
+    socket.to(room).emit('typingMsg', data);
+    //socket.broadcast.to().emit has the same effect!!!
+  });
+
+  socket.on('disconnect', () => {
+    socket.leave(room);
+    socket.to(room).emit('message', {
+      id: socket.id,
+      name: 'Admin',
+      room,
+      text: `${name} has left!`,
+    });
+    console.log(name, ' has left ', room, ' chatroom!');
+  });
 });
 
 module.exports = app;

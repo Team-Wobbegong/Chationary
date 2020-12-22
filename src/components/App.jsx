@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import ChatBoard from './ChatBoard';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
+import Chat from './Chat';
 import MainNav from './MainNav';
 
 class App extends Component {
@@ -11,12 +11,8 @@ class App extends Component {
         <MainNav />
         <div className="router">
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/en">
-              <ChatBoard />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/chat/:name/:room" component={Chat} />
           </Switch>
         </div>
       </div>
