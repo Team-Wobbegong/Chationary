@@ -1,7 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { MenuItems } from './MenuItems';
-import NavDropdown from './NavDropdown';
 import useToggle from './useToggle';
 
 export default function MainNav() {
@@ -42,9 +41,7 @@ export default function MainNav() {
           // }
           return (
             <li className="MainNav-item" key={`menuitem-${idx}`}>
-              <Link to={item.link} >
-                {item.itemName}
-              </Link>
+              <Link to={item.link}>{item.itemName}</Link>
             </li>
           );
         })}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default (iniVal) => {
   const [value, setValue] = useState(iniVal);

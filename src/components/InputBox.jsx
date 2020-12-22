@@ -1,20 +1,24 @@
 import React from 'react';
-import useInputState from './useInputState';
 
-const InputBox = ({ socket, name }) => {
-  console.log('socket===>', socket);
-  const [newMessage, handleNewMessage, resetNewMessage] = useInputState('');
+const InputBox = ({
+  newMessage,
+  setNewMessage,
+  sendNewMessage,
+  setTypingMsg,
+}) => {
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage(e);
+    } else {
+      setTypingMsg();
+    }
+  };
 
-  const handleClick = (e) => {
+  const handleSendMessage = (e) => {
+    console.log('handleSendMessage!');
     e.preventDefault();
-    //emit message
-    socket.emit('chatMessage', {
-      user: name,
-      text: newMessage,
-    });
-
-    resetNewMessage();
-    console.log('the link is clicked');
+    sendNewMessage(newMessage);
+    setNewMessage('');
   };
 
   return (
@@ -24,9 +28,10 @@ const InputBox = ({ socket, name }) => {
         type='text'
         placeholder='Type a message...'
         value={newMessage}
-        onChange={handleNewMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
-      <button className='sendButton' onClick={handleClick}>
+      <button className='sendButton' onClick={handleSendMessage}>
         Send
       </button>
     </div>

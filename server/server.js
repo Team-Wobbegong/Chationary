@@ -72,31 +72,46 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 io.on('connection', (socket) => {
-  //console.log('socket => ', socket);
   console.log('socket.id => ', socket.id);
+  const { name, room } = socket.handshake.query;
 
-  // Add callback?
-  socket.on('join', ({ name, room }) => {
-    console.log('name,room===>', name, room);
-    socket.emit('message', {
-      user: 'admin',
-      text: `${name}, welcome to ${room} chatroom.`,
-    });
+  console.log('before joining room => socket.rooms => ', socket.rooms);
+  socket.join(room);
+  console.log('After joining room => ', socket.rooms);
 
-    socket.on('chatMessage', function (data) {
-      console.log('date==>', data);
-      io.sockets.emit('chatMessage', data);
-    });
+  socket.emit('message', {
+    id: socket.id,
+    name: 'Admin',
+    room,
+    text: `${name}, welcome to ${room} chatroom.`,
+  });
 
-    // console.log('Before joining the room => ', socket.rooms);
-    // socket.join(room);
-    // console.log('After joining the room => ', socket.rooms);
+  socket.to(room).emit('message', {
+    id: socket.id,
+    name: 'Admin',
+    room,
+    text: `${name} has joined!`,
+  });
+
+  socket.on('sendNewMessage', (message) => {
+    io.in(room).emit('message', message);
+  });
+
+  socket.on('typing', (data) => {
+    console.log('data-->', data);
+    socket.to(room).emit('typingMsg', data);
+    //socket.broadcast.to().emit has the same effect!!!
   });
 
   socket.on('disconnect', () => {
-    console.log('User had left!');
-    // // How to use  socket.leave(room)??
-    // socket.leave(room);
+    socket.leave(room);
+    socket.to(room).emit('message', {
+      id: socket.id,
+      name: 'Admin',
+      room,
+      text: `${name} has left!`,
+    });
+    console.log(name, ' has left ', room, ' chatroom!');
   });
 });
 

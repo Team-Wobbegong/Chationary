@@ -1,53 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 
 import Messages from './Messages';
 import InfoBar from './InfoBar';
 import InputBox from './InputBox';
-
-let socket;
-const endpoint = 'localhost:8080';
+import useSocket from './useSocket';
 
 const Chat = ({ match }) => {
   const { name, room } = match.params;
   // console.log(match.params);
+  const [messages, typeMsg, sendNewMessage, setTypingMsg] = useSocket(
+    name,
+    room
+  );
 
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    console.log('useEffect fired!');
-
-    socket = io(endpoint);
-    // Add callback?
-    socket.emit('join', { name, room });
-    console.log('frontend emitting message to backend');
-    return () => {
-      // // BAD, will throw an error?
-      // socket.emit('disconnect');
-      // socket.off();
-    };
-  }, [endpoint, name, room]);
-
-  useEffect(() => {
-    console.log('receiving message from the backend socket');
-    socket.on('message', (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
-    // figure out what to listen ???
-
-    socket.on('chatMessage', function (data) {
-      setMessages([...messages, data]);
-    });
-
-    console.log('messages-->', messages);
-  });
+  //console.log(setTypingMsg);
+  const [newMessage, setNewMessage] = useState('');
 
   return (
     <div className='chatOuterContainer'>
-      <div className='chat'>
+      <div className='chatInnerContainer'>
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <InputBox socket={socket} name={name} />
+        <Messages messages={messages} name={name} typeMsg={typeMsg} />
+        <InputBox
+          room={room}
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          sendNewMessage={sendNewMessage}
+          setTypingMsg={setTypingMsg}
+        />
       </div>
     </div>
   );

@@ -30,3 +30,24 @@
   font-size: 1.1em;
   word-wrap: break-word;
 }
+
+.pr {
+  padding-right: 10px;
+}
+
+.flexend {
+  justify-content: flex-end;
+}
+
+.lt {
+  background: #F3F3F3;
+}
+
+.dk {
+  color: #353535;
+}
+
+.pl {
+  padding-left: 10px;
+}
+
