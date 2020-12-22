@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
     text: `${name} has joined!`,
   });
 
-  socket.on('sendMessage', (message) => {
+  socket.on('sendNewMessage', (message) => {
     io.in(room).emit('message', message);
   });
 

@@ -12,6 +12,7 @@ const Chat = ({ match }) => {
   const [newMessage, setNewMessage] = useState('');
 
   const handleSendMessage = (e) => {
+    console.log("handleSendMessage!")
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage('');
