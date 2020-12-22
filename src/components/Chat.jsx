@@ -38,6 +38,8 @@ const Chat = ({ match }) => {
     socket.on('chatMessage', function (data) {
       setMessages([...messages, data]);
     });
+
+    console.log('messages-->', messages);
   });
 
   return (

@@ -8,7 +8,8 @@ const Message = ({ message, name }) => {
   return (
     <div className='message'>
       <p className='sentTextUser'>
-        {message.user === 'admin' ? null : `${name}: `}
+        {message.user}
+        {/* {message.user === 'admin' ? null : `${name}: `} */}
       </p>
       <div className='textBox'>
         <p className='text'>{message.text}</p>
