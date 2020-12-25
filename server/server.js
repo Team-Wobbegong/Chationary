@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const chalk = require('chalk');
 
 const app = express();
 const PORT = 3000;
@@ -75,9 +76,12 @@ io.on('connection', (socket) => {
   console.log('socket.id => ', socket.id);
   const { name, room } = socket.handshake.query;
 
-  console.log('before joining room => socket.rooms => ', socket.rooms);
+  console.log(
+    chalk.blue.inverse.bold('before joining room => socket.rooms => '),
+    socket.rooms
+  );
   socket.join(room);
-  console.log('After joining room => ', socket.rooms);
+  console.log(chalk.green.inverse.bold('After joining room => '), socket.rooms);
 
   socket.emit('message', {
     id: socket.id,
