@@ -27,9 +27,11 @@ function VocabAPI() {
         header: { 'Content-Type': 'Application/JSON' },
         body: body
       })
+      console.log('in post request')
       console.log(response);
       setDefinition(response.data);
     } catch (err) {
+      console.log('post request error client side')
       console.log(`Post error on /dictionary: ${err}`)
     }
     

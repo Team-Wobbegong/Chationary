@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const { Http2ServerRequest } = require('http2');
 
 const app = express();
 const PORT = 3000;
@@ -31,7 +32,7 @@ const strictMatch = 'false';
 let definition = 'Sorry, we cannot find this word';
 
 app.post('/dictionary', (req, res) => {
-  console.log('req.body', req.body);
+  console.log('backend request:', req.body);
   wordId = req.body.body.vocab;
   console.log(wordId);
 
@@ -47,6 +48,7 @@ app.post('/dictionary', (req, res) => {
   };
 
   https.get(options, (resp) => {
+    console.log('in https get request');
     let body = '';
     resp.on('data', (d) => {
       body += d;
@@ -55,8 +57,10 @@ app.post('/dictionary', (req, res) => {
       try{
         const data = JSON.parse(body);
         definition = data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
+        console.log(definition);
         res.status(200).json(definition);
       } catch {
+        console.log(definition);
         res.status(200).json(definition);
       }
     });
