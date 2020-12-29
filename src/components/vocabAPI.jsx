@@ -1,11 +1,13 @@
 import React, { useState, Component } from 'react';
 import Axios from 'axios';
+import { Languages } from './language'
 
 function VocabAPI() {
   // React Hooks State (Updating state is async)
   const [vocab, setVocab] = useState('');
   const [search, setSearch] = useState('');
-  const [vocabHist, setVocabHist] = useState([' ', 'apple', ' ', 'banana']);
+  const [vocabHist, setVocabHist] = useState([]);
+  const [translation, setTranslation] = useState(null);
   const [definition, setDefinition] = useState(null);
   const [sourceLang, setSourceLang] = useState('en');
   const [targetLang, setTargetLang] = useState('en');
@@ -16,15 +18,12 @@ function VocabAPI() {
     setSearch(e.target.value.replace(/ /gi, '%20'));
   }
 
-  const handleTranslate = () => {
-    console.log('Translated!')
-     // window.open(`https://translate.google.com/?sl=${selectLang}&tl=${transLang}&text=${search}&op=translate`); //Workaround for GoogleTranslate API requiring $$$
-  }
-
   const handleSubmitVocab = async (e) => {
     e.preventDefault(); //Prevents hot reload upon submit
     
-    const currSearch = e.target[2].value;
+    setTranslation(`https://translate.google.com/?sl=${sourceLang}&tl=${targetLang}&text=${search}&op=translate`);
+
+    const currSearch = e.target[0].value;
     const body = { vocab: currSearch, sl: sourceLang, tl: targetLang };
     try {
       console.log('Logged try block for post request');
@@ -55,39 +54,51 @@ function VocabAPI() {
   const handleTargetLang = (e) => {
     setTargetLang(e.target.value);
   }
+
+  const handleLink = () => {
+    if(!vocab == '' && definition !== 'Sorry, we cannot find this word') window.open(translation);
+  }
   
   //Render
   return (
-    <div className='vocabContainer'>
-      <form onSubmit={handleSubmitVocab}>
-        <label className='apiTextBox'>
+    <div className='APIContainer'>
+      <div className='formContainer'>
+        <form onSubmit={handleSubmitVocab}>
+          <label className='apiTextBox'>
+            <div>
+              <input type="text" name="vocab" placeholder="Vocabulary Word" value={vocab} onChange={handleVocab}></input> 
+              <input type="submit" value="Define"/> 
+            </div>
+          </label>
           <label htmlFor='sl' className='slContainer'>Translate from: </label>
-            <select name='sl' id='sl' className='sl' value={sourceLang} onChange={handleSourceLang}>
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="fr">French</option>
-              <option value="de">German</option>
-            </select>
-          <label htmlFor='tl' className='tlContainer'>Translate to: </label>
-            <select name='tl' id='tl' className='tl' value={targetLang} onChange={handleTargetLang}>
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="fr">French</option>
-              <option value="de">German</option>
-            </select>
-          <div>
-            <input type="text" name="vocab" placeholder="Vocabulary Word" value={vocab} onChange={handleVocab}></input> 
-            <input type="submit" value="Define"/> 
-          </div>
-        </label>
-      </form>
+              <select name='sl' id='sl' className='sl' value={sourceLang} onChange={handleSourceLang}>
+                { Languages.map((language) => (
+                  <option key={`l-${language.langId}`} value={language.value}>
+                    {language.language}
+                  </option>
+                )) }
+              </select>
+            <label htmlFor='tl' className='tlContainer'>Translate to: </label>
+              <select name='tl' id='tl' className='tl' value={targetLang} onChange={handleTargetLang}>
+                { Languages.map((language) => (
+                  <option key={`l-${language.langId}`} value={language.value}>
+                    {language.language}
+                  </option>
+                )) }
+              </select>
+        </form>
+      </div>
         <div>Definition: { definition }</div>
+        <div className='transContainer'>
+          <p>Translation:</p>
+          <div className='translation'>
+            <button id='transBtn' onClick={ handleLink }>Click to Translate Vocab</button>
+          </div>
+        </div>
         <div className='vocabHistContainer'>
           <p>Search History:</p>
           <div className='vocabHist'> { vocabHist } </div>
         </div>
-      
-      <button className='translateBtn' onClick={handleTranslate}>Translate</button>
     </div>
   )
 }
