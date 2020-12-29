@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import API from './API';
+import API from './VocabAPI';
 import Chat from './Chat';
 
 export default class ChatBoard extends Component {

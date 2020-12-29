@@ -3,6 +3,7 @@ import Messages from './Messages';
 import InfoBar from './InfoBar';
 import InputBox from './InputBox';
 import useSocket from './useSocket';
+import API from './VocabAPI';
 
 const Chat = ({ match }) => {
   const { name, room } = match.params;
@@ -17,6 +18,7 @@ const Chat = ({ match }) => {
 
   return (
     <div className='chatOuterContainer'>
+      <div><API /></div>
       <div className='chatInnerContainer'>
         <InfoBar room={room} />
         <Messages messages={messages} name={name} typeMsg={typeMsg} />
