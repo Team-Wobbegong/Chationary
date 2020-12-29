@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import useToggle from './useToggle';
 import { Smile } from 'react-feather';
 import { Picker } from 'emoji-mart';
@@ -7,6 +7,7 @@ import 'emoji-mart/css/emoji-mart.css';
 const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
   const [newMessage, setNewMessage] = useState('');
   const [showEmojiPicker, toggleShowEmojiPicker] = useToggle(false);
+  const inputElement = useRef(null);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -27,6 +28,7 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
     // console.log('emoji => ', emoji);
     setNewMessage(`${newMessage} ${emoji.native} `);
     toggleShowEmojiPicker();
+    inputElement.current.focus();
   };
 
   return (
@@ -49,6 +51,7 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
+          ref={inputElement}
         />
         <button className="sendButton" onClick={handleSendMessage}>
           Send
