@@ -1,14 +1,13 @@
-import React from 'react';
-import useInputState from './useInputState';
+import React, { useState } from 'react';
+import useToggle from './useToggle';
+import { Smile } from 'react-feather';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 
-const InputBox = ({
-  // newMessage,
-  // setNewMessage,
-  sendNewMessage,
-  setTypingMsg,
-}) => {
+const InputBox = ({ sendNewMessage, setTypingMsg }) => {
   //added customized hook
-  const [newMessage, handleNewMessage, reset] = useInputState('');
+  const [newMessage, setNewMessage] = useState('');
+  const [showEmojiPicker, toggleShowEmojiPicker] = useToggle(false);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -23,22 +22,37 @@ const InputBox = ({
     e.preventDefault();
     sendNewMessage(newMessage);
     //calling reset in the customized hook to set input to ''
-    reset();
+    setNewMessage('');
+  };
+
+  const addEmoji = (emoji) => {
+    setNewMessage((newMessage) => `${newMessage} ${emoji.native} `);
+    toggleShowEmojiPicker();
   };
 
   return (
-    <div className='form'>
-      <input
-        className='inputBox'
-        type='text'
-        placeholder='Type a message...'
-        value={newMessage}
-        onChange={handleNewMessage}
-        onKeyPress={handleKeyPress}
-      />
-      <button className='sendButton' onClick={handleSendMessage}>
-        Send
-      </button>
+    <div className="inputBoxOuterContainer">
+      <div>{showEmojiPicker && <Picker set="apple" onSelect={addEmoji} />}</div>
+      <div className="form">
+        <button
+          className="toggle-emoji"
+          type="button"
+          onClick={toggleShowEmojiPicker}
+        >
+          <Smile />
+        </button>
+        <input
+          className="inputBox"
+          type="text"
+          placeholder="Type a message..."
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button className="sendButton" onClick={handleSendMessage}>
+          Send
+        </button>
+      </div>
     </div>
   );
 };
