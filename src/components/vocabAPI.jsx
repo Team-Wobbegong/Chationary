@@ -16,23 +16,26 @@ function VocabAPI() {
     setSearch(e.target.value.replace(/ /gi, '%20'));
   }
 
+  const handleTranslate = () => {
+    console.log('Translated!')
+     // window.open(`https://translate.google.com/?sl=${selectLang}&tl=${transLang}&text=${search}&op=translate`); //Workaround for GoogleTranslate API requiring $$$
+  }
+
   const handleSubmitVocab = async (e) => {
     e.preventDefault(); //Prevents hot reload upon submit
-    // window.open(`https://translate.google.com/?sl=${selectLang}&tl=${transLang}&text=${search}&op=translate`); //Workaround for GoogleTranslate API requiring $$$
     
     const currSearch = e.target[2].value;
     const body = { vocab: currSearch, sl: sourceLang, tl: targetLang };
     try {
+      console.log('Logged try block for post request');
       const response = await Axios.post('/dictionary', {
         header: { 'Content-Type': 'Application/JSON' },
         body: body
       })
-      console.log('in post request')
-      console.log(response);
+      console.log(`reponse: ${response}`);
       setDefinition(response.data);
     } catch (err) {
-      console.log('post request error client side')
-      console.log(`Post error on /dictionary: ${err}`)
+      console.log(`Catch block, POST error on /dictionary: ${err}`)
     }
     
     if (vocabHist.length <= 18) {
@@ -56,7 +59,6 @@ function VocabAPI() {
   //Render
   return (
     <div className='vocabContainer'>
-      This is our API Component!
       <form onSubmit={handleSubmitVocab}>
         <label className='apiTextBox'>
           <label htmlFor='sl' className='slContainer'>Translate from: </label>
@@ -74,16 +76,18 @@ function VocabAPI() {
               <option value="de">German</option>
             </select>
           <div>
-            <input type="text" name="vocab" placeholder="Translate vocabulary" value={vocab} onChange={handleVocab}></input> 
-            <input type="submit" value="Translate"/> 
+            <input type="text" name="vocab" placeholder="Vocabulary Word" value={vocab} onChange={handleVocab}></input> 
+            <input type="submit" value="Define"/> 
           </div>
         </label>
+      </form>
         <div>Definition: { definition }</div>
         <div className='vocabHistContainer'>
           <p>Search History:</p>
           <div className='vocabHist'> { vocabHist } </div>
         </div>
-      </form>
+      
+      <button className='translateBtn' onClick={handleTranslate}>Translate</button>
     </div>
   )
 }

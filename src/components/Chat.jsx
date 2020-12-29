@@ -3,7 +3,7 @@ import Messages from './Messages';
 import InfoBar from './InfoBar';
 import InputBox from './InputBox';
 import useSocket from './useSocket';
-import API from './vocabAPI';
+import API from './VocabAPI';
 
 const Chat = ({ match }) => {
   const { name, room } = match.params;

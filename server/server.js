@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const { Http2ServerRequest } = require('http2');
+const https = require('https');
 
 const app = express();
 const PORT = 3000;
@@ -29,9 +29,9 @@ const language = 'en-us';
 let wordId = 'banana';
 const fields = 'definitions';
 const strictMatch = 'false';
-let definition = 'Sorry, we cannot find this word';
 
 app.post('/dictionary', (req, res) => {
+  let definition = 'Sorry, we cannot find this word';
   console.log('backend request:', req.body);
   wordId = req.body.body.vocab;
   console.log(wordId);
@@ -66,7 +66,6 @@ app.post('/dictionary', (req, res) => {
     });
   });
 });
-
 
 //express server  is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
 /**
