@@ -4,8 +4,7 @@ import { Smile } from 'react-feather';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 
-const InputBox = ({ sendNewMessage, setTypingMsg }) => {
-  //added customized hook
+const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
   const [newMessage, setNewMessage] = useState('');
   const [showEmojiPicker, toggleShowEmojiPicker] = useToggle(false);
 
@@ -13,26 +12,28 @@ const InputBox = ({ sendNewMessage, setTypingMsg }) => {
     if (e.key === 'Enter') {
       handleSendMessage(e);
     } else {
-      setTypingMsg();
+      sendTypingMsg();
     }
   };
 
   const handleSendMessage = (e) => {
-    console.log('handleSendMessage!');
+    // console.log('handleSendMessage!');
     e.preventDefault();
     sendNewMessage(newMessage);
-    //calling reset in the customized hook to set input to ''
     setNewMessage('');
   };
 
   const addEmoji = (emoji) => {
-    setNewMessage((newMessage) => `${newMessage} ${emoji.native} `);
+    // console.log('emoji => ', emoji);
+    setNewMessage(`${newMessage} ${emoji.native} `);
     toggleShowEmojiPicker();
   };
 
   return (
     <div className="inputBoxOuterContainer">
-      <div>{showEmojiPicker && <Picker set="apple" onSelect={addEmoji} />}</div>
+      <div className="emojiPicker">
+        {showEmojiPicker && <Picker set="apple" onSelect={addEmoji} />}
+      </div>
       <div className="form">
         <button
           className="toggle-emoji"

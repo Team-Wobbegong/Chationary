@@ -4,24 +4,24 @@ import { Chatrooms } from './Chatrooms';
 import useInputState from './useInputState';
 
 const Home = () => {
-  const [name, handleChangeName, resetName] = useInputState('');
-  const [room, handleChangeRoom, resetRoom] = useInputState('');
+  const [name, handleChangeName] = useInputState('');
+  const [room, handleChangeRoom] = useInputState('');
 
   return (
-    <div className='homeOuterContainer'>
-      <div className='homeInnerContainer'>
-        <h1 className='heading'>Welcome</h1>
+    <div className="homeOuterContainer">
+      <div className="homeInnerContainer">
+        <h1 className="heading">Welcome</h1>
         <>
           <input
-            placeholder='Name'
-            className='homeInput'
-            type='text'
+            placeholder="Name"
+            className="homeInput"
+            type="text"
             onChange={handleChangeName}
           />
         </>
         <>
           <select
-            className='homeInput'
+            className="homeInput"
             value={room}
             onChange={handleChangeRoom}
           >
@@ -34,14 +34,16 @@ const Home = () => {
           </select>
         </>
         <>
-          <Link to={`/chat/${name}/${room}`}>
-            <button
-              onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-              className={'button'}
-              type='submit'
-            >
-              Join
-            </button>
+          <Link
+            className={'homeLink-join'}
+            onClick={(e) =>
+              !name || !room || room === 'Choose A Chatroom'
+                ? e.preventDefault()
+                : null
+            }
+            to={`/chat/${name}/${room}`}
+          >
+            Join
           </Link>
         </>
       </div>
