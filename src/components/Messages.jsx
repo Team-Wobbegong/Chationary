@@ -1,7 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import Message from './Message';
 
-export default class Messages extends Component {
-  render() {
-    return <div>This is our Messages Component!</div>;
-  }
-}
+const Messages = ({ messages, name, typeMsg }) => {
+  console.log('type-->', typeMsg);
+  //const [typing, setTyping] = useState('');
+
+  // useEffect(() => {
+  //   socket.on('typing', (typingData) => {
+  //     setTyping(typingData.text);
+  //   });
+  // });
+
+  return (
+    <ScrollToBottom className='messages'>
+      {messages.map((message, i) => (
+        <div key={`message-${i}`}>
+          <Message message={message} name={name} />
+        </div>
+      ))}
+      <p>{typeMsg}</p>
+    </ScrollToBottom>
+  );
+};
+
+export default Messages;
