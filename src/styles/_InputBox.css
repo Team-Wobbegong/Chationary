@@ -16,6 +16,10 @@
   font-size: 1.2em;
 }
 
+.inputBox:focus {
+  outline: none;
+}
+
 .sendButton {
   color: white;
   text-transform: uppercase;
@@ -41,4 +45,8 @@
 .toggle-emoji svg {
   width: 28px;
   height: 28px;
+}
+
+.toggle-emoji:focus {
+  outline: none;
 }

@@ -7,7 +7,7 @@ import 'emoji-mart/css/emoji-mart.css';
 const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
   const [newMessage, setNewMessage] = useState('');
   const [showEmojiPicker, toggleShowEmojiPicker] = useToggle(false);
-  const inputElement = useRef(null);
+  const inputEl = useRef(null);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -22,13 +22,14 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
     e.preventDefault();
     sendNewMessage(newMessage);
     setNewMessage('');
+    inputEl.current.focus();
   };
 
   const addEmoji = (emoji) => {
     // console.log('emoji => ', emoji);
     setNewMessage(`${newMessage} ${emoji.native} `);
     toggleShowEmojiPicker();
-    inputElement.current.focus();
+    inputEl.current.focus();
   };
 
   return (
@@ -51,7 +52,8 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          ref={inputElement}
+          autoFocus
+          ref={inputEl}
         />
         <button className="sendButton" onClick={handleSendMessage}>
           Send

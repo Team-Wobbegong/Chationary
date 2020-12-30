@@ -19,6 +19,10 @@
   margin-bottom: 20px;
 }
 
+.homeInput:focus {
+  outline: none;
+}
+
 .heading {
   color: white;
   font-size: 2.5em;
