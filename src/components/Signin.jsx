@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Signup() {
   return (
-    <form className='Form' method='POST' action='/signup'>
+    <form className='Form' method='POST' action='/signin'>
       <label>
         Username:
         <input className='input' type='text' />
@@ -12,9 +12,9 @@ export default function Signup() {
         Password:
         <input className='input' type='password' />
       </label>
-      <Link to='/home'>
-        <button className='btn-signin'>Sign in</button>
-      </Link>
+
+      <button className='btn-signin'>Sign in</button>
+
       <div>
         <span>No account?</span>
         <Link to='/signup'>Sign up</Link>
