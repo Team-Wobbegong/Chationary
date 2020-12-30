@@ -74,14 +74,7 @@ app.post('/dictionary', (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../src')));
 
-/*
- * define route handlers
- */
-// ********** This is just for testing only! Please change **********
 
-// app.get('/user', (req, res) => {
-//   res.send({ response: 'Server is up and running.' }).status(200);
-// });
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => {
