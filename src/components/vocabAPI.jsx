@@ -63,7 +63,7 @@ function VocabAPI() {
   //Render
   return (
     <div className='apiContainer'>
-
+      <div className='tools'>Chationary Tools</div>
       <div className='formContainer'>
         <form onSubmit={handleSubmitVocab}>
           <label className='apiTextBox'>
@@ -72,16 +72,20 @@ function VocabAPI() {
               <input type="submit" value="Define"/> 
             </div>
           </label>
-          <div>Definition: { definition }</div>
-          <label htmlFor='sl' className='slContainer'>Translate from: </label>
-              <select name='sl' id='sl' className='sl' value={sourceLang} onChange={handleSourceLang}>
-                { Languages.map((language) => (
-                  <option key={`l-${language.langId}`} value={language.value}>
-                    {language.language}
-                  </option>
-                )) }
-              </select>
-            <label htmlFor='tl' className='tlContainer'>Translate to: </label>
+          <div className='defContainer'>
+            <p>Definition</p>
+            <div>{ definition }</div>
+          </div>
+          <div className='langContainer'>
+            <p><label htmlFor='sl'>Translate from</label></p>
+                <select name='sl' id='sl' className='sl' value={sourceLang} onChange={handleSourceLang}>
+                  { Languages.map((language) => (
+                    <option key={`l-${language.langId}`} value={language.value}>
+                      {language.language}
+                    </option>
+                  )) }
+                </select>
+            <p><label htmlFor='tl'>Translate to</label></p>
               <select name='tl' id='tl' className='tl' value={targetLang} onChange={handleTargetLang}>
                 { Languages.map((language) => (
                   <option key={`l-${language.langId}`} value={language.value}>
@@ -89,6 +93,7 @@ function VocabAPI() {
                   </option>
                 )) }
               </select>
+          </div>
         </form>
       </div>
 
@@ -99,7 +104,7 @@ function VocabAPI() {
           </div>
         </div>
         <div className='vocabHistContainer'>
-          <p>Search History:</p>
+          <p>Search History</p>
           <div className='vocabHist'> { vocabHist } </div>
         </div>
 

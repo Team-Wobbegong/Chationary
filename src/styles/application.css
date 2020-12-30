@@ -5,6 +5,7 @@
 @import '_Messages';
 @import '_Message';
 @import '_inputBox';
+@import '_VocabAPI';
 
 * {
   box-sizing: border-box;
