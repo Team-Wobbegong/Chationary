@@ -7,7 +7,6 @@ function VocabAPI() {
   const [vocab, setVocab] = useState('');
   const [search, setSearch] = useState('');
   const [vocabHist, setVocabHist] = useState([]);
-  const [translation, setTranslation] = useState(null);
   const [definition, setDefinition] = useState(null);
   const [sourceLang, setSourceLang] = useState('en');
   const [targetLang, setTargetLang] = useState('en');
@@ -18,10 +17,24 @@ function VocabAPI() {
     setSearch(e.target.value.replace(/ /gi, '%20'));
   }
 
+  const handleSourceLang = (e) => {
+    setSourceLang(e.target.value);
+  }
+
+  const handleTargetLang = (e) => {
+    setTargetLang(e.target.value);
+  }
+
+  const handleLink = () => {
+    let url = `https://translate.google.com/?sl=${sourceLang}&tl=${targetLang}&text=${search}&op=translate`;
+    if(!vocab == '' && definition !== 'Sorry, we cannot find this word') {
+      window.open(url);
+    }
+  }
+
+  // API Functionality
   const handleSubmitVocab = async (e) => {
     e.preventDefault(); //Prevents hot reload upon submit
-    
-    setTranslation(`https://translate.google.com/?sl=${sourceLang}&tl=${targetLang}&text=${search}&op=translate`);
 
     const currSearch = e.target[0].value;
     const body = { vocab: currSearch, sl: sourceLang, tl: targetLang };
@@ -36,7 +49,7 @@ function VocabAPI() {
     } catch (err) {
       console.log(`Catch block, POST error on /dictionary: ${err}`)
     }
-    
+    // Vocab History Functionality
     if (vocabHist.length <= 18) {
       setVocabHist([' ', currSearch, ...vocabHist]);
     } else {
@@ -46,22 +59,11 @@ function VocabAPI() {
     
     console.log('Form Submitted');
   }
-
-  const handleSourceLang = (e) => {
-    setSourceLang(e.target.value);
-  }
-
-  const handleTargetLang = (e) => {
-    setTargetLang(e.target.value);
-  }
-
-  const handleLink = () => {
-    if(!vocab == '' && definition !== 'Sorry, we cannot find this word') window.open(translation);
-  }
   
   //Render
   return (
-    <div className='APIContainer'>
+    <div className='apiContainer'>
+
       <div className='formContainer'>
         <form onSubmit={handleSubmitVocab}>
           <label className='apiTextBox'>
@@ -70,6 +72,7 @@ function VocabAPI() {
               <input type="submit" value="Define"/> 
             </div>
           </label>
+          <div>Definition: { definition }</div>
           <label htmlFor='sl' className='slContainer'>Translate from: </label>
               <select name='sl' id='sl' className='sl' value={sourceLang} onChange={handleSourceLang}>
                 { Languages.map((language) => (
@@ -88,9 +91,9 @@ function VocabAPI() {
               </select>
         </form>
       </div>
-        <div>Definition: { definition }</div>
+
+        
         <div className='transContainer'>
-          <p>Translation:</p>
           <div className='translation'>
             <button id='transBtn' onClick={ handleLink }>Click to Translate Vocab</button>
           </div>
@@ -99,6 +102,7 @@ function VocabAPI() {
           <p>Search History:</p>
           <div className='vocabHist'> { vocabHist } </div>
         </div>
+
     </div>
   )
 }
