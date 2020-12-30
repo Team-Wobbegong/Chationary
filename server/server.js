@@ -9,6 +9,13 @@ const PORT = 3000;
 /**
  * require routers
  */
+app.post('/signup', (req, res) => {
+  //controller
+});
+
+app.post('/signin', (req, res) => {
+  //controller...
+});
 
 /**
  * handle parsing request body
@@ -54,9 +61,10 @@ app.post('/dictionary', (req, res) => {
       body += d;
     });
     resp.on('end', () => {
-      try{
+      try {
         const data = JSON.parse(body);
-        definition = data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
+        definition =
+          data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
         console.log(definition);
         res.status(200).json(definition);
       } catch {
@@ -67,21 +75,14 @@ app.post('/dictionary', (req, res) => {
   });
 });
 
-//express server  is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
+//express server is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
 /**
  * handle requests for static files
  */
 
 app.use(express.static(path.join(__dirname, '../src')));
 
-/*
- * define route handlers
- */
-// ********** This is just for testing only! Please change **********
 
-// app.get('/user', (req, res) => {
-//   res.send({ response: 'Server is up and running.' }).status(200);
-// });
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => {
