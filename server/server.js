@@ -26,7 +26,7 @@ app.use(cookieParser());
 const appId = '5d31df20';
 const appKey = '0ef1989e11f3eccf8ebb9f20590cdb28';
 const language = 'en-us';
-let wordId = 'banana';
+let wordId;
 const fields = 'definitions';
 const strictMatch = 'false';
 
