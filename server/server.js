@@ -9,13 +9,8 @@ const PORT = 3000;
 /**
  * require routers
  */
-app.post('/signup', (req, res) => {
-  //controller
-});
 
-app.post('/signin', (req, res) => {
-  //controller...
-});
+const authRouter = require('./routes/auth');
 
 /**
  * handle parsing request body
@@ -29,7 +24,20 @@ app.use(express.urlencoded()); //recognize the incoming Request Object as string
  */
 app.use(cookieParser());
 
-// Merriam Webster API
+//express server is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
+/**
+ * handle requests for static files
+ */
+
+app.use(express.static(path.join(__dirname, '../src')));
+
+/**
+ * define route handlers
+ */
+
+app.use('/auth', authRouter);
+
+// Oxford Dictionaries API
 const appId = '5d31df20';
 const appKey = '0ef1989e11f3eccf8ebb9f20590cdb28';
 const language = 'en-us';
@@ -74,15 +82,6 @@ app.post('/dictionary', (req, res) => {
     });
   });
 });
-
-//express server is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
-/**
- * handle requests for static files
- */
-
-app.use(express.static(path.join(__dirname, '../src')));
-
-
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => {

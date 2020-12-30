@@ -11,12 +11,12 @@ class App extends Component {
     return (
       <div>
         <MainNav />
-        <div className='router'>
+        <div className="router">
           <Switch>
-            <Route exact path='/' component={Signin} />
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path='/home' component={Home} />
-            <Route exact path='/chat/:name/:room' component={Chat} />
+            <Route exact path="/" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/chat/:name/:room" component={Chat} />
           </Switch>
         </div>
       </div>
