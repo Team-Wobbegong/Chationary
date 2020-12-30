@@ -4,8 +4,8 @@ import { Chatrooms } from './Chatrooms';
 import useInputState from './useInputState';
 
 const Home = () => {
-  const [name, handleChangeName, resetName] = useInputState('');
-  const [room, handleChangeRoom, resetRoom] = useInputState('');
+  const [name, handleChangeName] = useInputState('');
+  const [room, handleChangeRoom] = useInputState('');
 
   return (
     <div className='homeOuterContainer'>
@@ -38,7 +38,6 @@ const Home = () => {
             <button
               onClick={(e) => (!name || !room ? e.preventDefault() : null)}
               className={'button'}
-              type='submit'
             >
               Join
             </button>

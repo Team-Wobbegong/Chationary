@@ -9,6 +9,13 @@ const PORT = 3000;
 /**
  * require routers
  */
+app.post('/signup', (req, res) => {
+  //controller
+});
+
+app.post('/signin', (req, res) => {
+  //controller...
+});
 
 /**
  * handle parsing request body
@@ -68,7 +75,7 @@ app.post('/dictionary', (req, res) => {
   });
 });
 
-//express server  is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
+//express server is serving all static assets found in your client folder & sending the images to the front end when it needs to find the images
 /**
  * handle requests for static files
  */
