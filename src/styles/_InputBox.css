@@ -3,35 +3,24 @@
   flex-direction: column;
 }
 
-.form {
+.inputBoxInnerContainer {
   display: flex;
   border-top: 2px solid #d3d3d3;
 }
 
 .inputBox {
-  border: none;
-  border-radius: 0;
-  padding: 5%;
   width: 80%;
   font-size: 1.2em;
-}
-
-.inputBox:focus {
-  outline: none;
+  margin: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .sendButton {
-  color: white;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979ff;
-  padding: 20px;
-  display: inline-block;
-  border: none;
   width: 20%;
 }
 
-.toggle-emoji {
+.emoji-icon {
   border: none;
   width: 50px;
   height: auto;
@@ -40,13 +29,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-right: 2px solid #d3d3d3;
 }
 
-.toggle-emoji svg {
+.emoji-icon svg {
   width: 28px;
   height: 28px;
-}
-
-.toggle-emoji:focus {
-  outline: none;
 }

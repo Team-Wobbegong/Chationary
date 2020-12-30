@@ -37,14 +37,14 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
       <div className="emojiPicker">
         {showEmojiPicker && <Picker set="apple" onSelect={addEmoji} />}
       </div>
-      <div className="form">
-        <button
-          className="toggle-emoji"
+      <div className="inputBoxInnerContainer">
+        <div
+          className="emoji-icon"
           type="button"
           onClick={toggleShowEmojiPicker}
         >
           <Smile />
-        </button>
+        </div>
         <input
           className="inputBox"
           type="text"

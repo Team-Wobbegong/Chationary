@@ -35,7 +35,6 @@ const Home = () => {
         </>
         <>
           <Link
-            className={'homeLink-join'}
             onClick={(e) =>
               !name || !room || room === 'Choose A Chatroom'
                 ? e.preventDefault()
@@ -43,7 +42,9 @@ const Home = () => {
             }
             to={`/chat/${name}/${room}`}
           >
-            Join
+            <button className={'homeButton'} type="submit">
+              Join
+            </button>
           </Link>
         </>
       </div>
