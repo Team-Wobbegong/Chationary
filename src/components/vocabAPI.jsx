@@ -29,6 +29,7 @@ function VocabAPI() {
     let url = `https://translate.google.com/?sl=${sourceLang}&tl=${targetLang}&text=${search}&op=translate`;
     if(!vocab == '' && definition !== 'Sorry, we cannot find this word') {
       window.open(url);
+      handleHistory(vocab);
     }
   }
 
@@ -49,15 +50,18 @@ function VocabAPI() {
     } catch (err) {
       console.log(`Catch block, POST error on /dictionary: ${err}`)
     }
-    // Vocab History Functionality
+    handleHistory(currSearch);
+    console.log('Form Submitted');
+  }
+
+  // Vocab History Functionality
+  const handleHistory = (v) => {
     if (vocabHist.length <= 18) {
-      setVocabHist([' ', currSearch, ...vocabHist]);
+      setVocabHist([' ', v, ...vocabHist]);
     } else {
       const vocabHistCopy = vocabHist.slice(0, vocabHist.length - 2);
-      setVocabHist([' ', currSearch, ...vocabHistCopy]);
+      setVocabHist([' ', v, ...vocabHistCopy]);
     }
-    
-    console.log('Form Submitted');
   }
   
   //Render
