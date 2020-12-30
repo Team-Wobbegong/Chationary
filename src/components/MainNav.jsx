@@ -4,8 +4,7 @@ import { MenuItems } from './MenuItems';
 import useToggle from './useToggle';
 
 export default function MainNav() {
-  const [dropdown, setDropdown] = useToggle(false);
-
+  // const [dropdown, setDropdown] = useToggle(false);
   return (
     <nav className="MainNav">
       <div className="title">

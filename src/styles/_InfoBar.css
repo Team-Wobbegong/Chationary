@@ -1,11 +1,11 @@
 .infoBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: white;
-  background: #2979ff;
-  border-radius: 4px 4px 0 0;
-  height: 60px;
+  justify-content: center;
+  color: #f8fafc;
+  background: #1c73e7;
+  border-radius: 2px;
+  height: 10%;
   width: 100%;
   padding-left: 20px;
 }

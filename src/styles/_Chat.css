@@ -3,16 +3,16 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f3f3f3;
+  background-color: #1a1a1d;
 }
 
 .chatInnerContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: white;
-  border-radius: 8px;
-  height: 60%;
+  background: #f8fafc;
+  border-radius: 2px;
+  height: 72%;
   width: 35%;
 }
 

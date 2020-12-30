@@ -11,30 +11,10 @@
   width: 20%;
 }
 
-.homeInput {
-  border: 1px solid #1a1a1d;
-  border-radius: 0;
-  padding: 15px 20px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 .heading {
-  color: white;
+  color: #f8fafc;
   font-size: 2.5em;
-  border-bottom: 2px solid white;
-}
-
-.button {
-  color: white;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979ff;
-  padding: 20px;
-  border-radius: 5px;
-  display: inline-block;
-  border: none;
-  width: 100%;
+  border-bottom: 2px solid #f8fafc;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

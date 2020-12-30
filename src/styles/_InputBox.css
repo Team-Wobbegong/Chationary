@@ -1,23 +1,38 @@
-.form {
+.inputBoxOuterContainer {
   display: flex;
-  border-top: 2px solid #D3D3D3;
+  flex-direction: column;
+}
+
+.inputBoxInnerContainer {
+  display: flex;
+  border-top: 2px solid #d3d3d3;
 }
 
 .inputBox {
-  border: none;
-  border-radius: 0;
-  padding: 5%;
   width: 80%;
   font-size: 1.2em;
+  margin: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .sendButton {
-  color: white;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979FF;
-  padding: 20px;
-  display: inline-block;
-  border: none;
   width: 20%;
+}
+
+.emoji-icon {
+  border: none;
+  width: 50px;
+  height: auto;
+  padding: 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #d3d3d3;
+}
+
+.emoji-icon svg {
+  width: 28px;
+  height: 28px;
 }

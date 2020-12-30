@@ -26,7 +26,7 @@ app.use(cookieParser());
 const appId = '5d31df20';
 const appKey = '0ef1989e11f3eccf8ebb9f20590cdb28';
 const language = 'en-us';
-let wordId = 'banana';
+let wordId;
 const fields = 'definitions';
 const strictMatch = 'false';
 
@@ -143,9 +143,9 @@ io.on('connection', (socket) => {
     io.in(room).emit('message', message);
   });
 
-  socket.on('typing', (data) => {
-    console.log('data-->', data);
-    socket.to(room).emit('typingMsg', data);
+  socket.on('sendTypingMsg', (data) => {
+    // console.log('data-->', data);
+    socket.to(room).emit('sendTypingMsg', data);
     //socket.broadcast.to().emit has the same effect!!!
   });
 

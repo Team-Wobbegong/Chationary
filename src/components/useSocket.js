@@ -18,15 +18,19 @@ const useSocket = (name, room) => {
 
     // Listens for incoming messages
     socket.on('message', (message) => {
-      setTypeMsg('');
+      // setTypeMsg('');
       // console.log(message);
       setMessages((messages) => [...messages, message]);
     });
     // console.log('receiving message from the backend socket');
 
-    socket.on('typingMsg', (data) => {
+    socket.on('sendTypingMsg', (data) => {
       // console.log(message);
       setTypeMsg(data);
+
+      setTimeout(() => {
+        setTypeMsg('');
+      }, 1000);
     });
 
     // Destroys the socket reference
@@ -49,11 +53,11 @@ const useSocket = (name, room) => {
     }
   };
 
-  const setTypingMsg = () => {
-    socket.emit('typing', `${name} is typing...`);
+  const sendTypingMsg = () => {
+    socket.emit('sendTypingMsg', `${name} is typing...`);
   };
 
-  return [messages, typeMsg, sendNewMessage, setTypingMsg];
+  return [messages, typeMsg, sendNewMessage, sendTypingMsg];
 };
 
 export default useSocket;
