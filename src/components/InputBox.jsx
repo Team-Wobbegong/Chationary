@@ -52,6 +52,7 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
+          onClick={showEmojiPicker ? toggleShowEmojiPicker : null}
           autoFocus
           ref={inputEl}
         />
