@@ -1,0 +1,87 @@
+.apiContainer {
+  background: white;
+  border-radius: 4px 4px 0 0;
+  max-width: 80%;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2979ff;
+  color: white;
+  border-radius: 4px 4px 0 0;
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.formContainer, .transContainer, .langContainer, .defContainer, .vocabHistContainer {
+  padding: 0px 10px;
+}
+
+.apiTextBox input[type=text] {
+  margin: 10px 0px;
+  padding: 10px;
+  display: inline-block;
+  border: 1px solid #c9c9c9;
+  width: 100%;
+}
+
+.apiTextBox input[type=submit] {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979FF;
+  padding: 10px;
+  display: inline-block;
+  border: none;
+  width: 100%;
+}
+
+.defContainer p, .vocabHistContainer p {
+  text-align: center;
+  text-transform: uppercase;
+  padding: 3px;
+  border: 1px solid #c9c9c9;
+}
+
+.defContainer div {
+}
+
+.langContainer p {
+  text-align: center;
+  background: #a8a8a8;
+  color: white;
+  text-transform: uppercase;
+}
+
+.langContainer select {
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid #c9c9c9;
+  text-transform: uppercase;
+  text-align: center;
+  text-align-last: center;
+}
+
+.sl, .tl {
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+}
+
+#transBtn {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979FF;
+  margin: 10px 0px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.vocabHistContainer div {
+  padding: 5px;
+}
