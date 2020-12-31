@@ -14,7 +14,7 @@ userController.createUser = async (req, res, next) => {
     console.log('hashedPassword => ', hashedPassword);
 
     const text = `
-      INSERT INTO users (username, password) 
+      INSERT INTO profiles (username, passkey) 
       VALUES ($1, $2) 
       RETURNING *
     ;`;
@@ -22,8 +22,6 @@ userController.createUser = async (req, res, next) => {
 
     const data = await db.query(text, values);
     console.log('data.rows[0] => ', data.rows[0]);
-
-    // res.locals.id = data.rows[0].id;
 
     return next();
   } catch (err) {
@@ -50,8 +48,8 @@ userController.verifyUser = async (req, res, next) => {
   try {
     const text = `
         SELECT *
-        from users
-        WHERE users.username = $1
+        from profiles
+        WHERE profiles.username = $1
       ;`;
     const values = [username];
 
@@ -60,7 +58,7 @@ userController.verifyUser = async (req, res, next) => {
 
     if (!data.rows[0]) return res.sendStatus(401);
 
-    const hashedPassword = data.rows[0].password;
+    const hashedPassword = data.rows[0].passkey;
     console.log('hashedPassword => ', hashedPassword);
 
     if (!hashedPassword) return res.sendStatus(401);
