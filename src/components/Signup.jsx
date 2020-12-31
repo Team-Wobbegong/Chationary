@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import useToggle from './useToggle';
 import useInputState from './useInputState';
 
 const Signup = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
-  const [state, setState] = useState(false);
-  const [show, setShow] = useState(true);
-  const [warn, toggleWarn] = useState(false);
+  const [warn, setWarn] = useState(false);
+  const [nameExists, setNameExists] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +16,7 @@ const Signup = ({ history }) => {
     console.log('body==>', body);
 
     try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
+      const response = await fetch('/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,83 +31,95 @@ const Signup = ({ history }) => {
         //redirect to Home
         history.push(`/join/${username}`);
       } else {
-        console.log(true);
-        toggleWarn(true);
+        setWarn(true);
+        setTimeout(() => {
+          setWarn(false);
+        }, 2000);
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignUp component:', error);
     }
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
 
-    console.log('username===>', username);
+    const body = { username };
+    console.log('body==>', body);
 
-    axios
-      .post('/auth/verify', { username })
-      .then((res) => {
-        console.log('res.data===>', res.data);
-        // true or false
-        if (res.data) {
-          setState(res.data);
-        } else {
-          setState(res.data);
-          setShow(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log('err===>', err);
+    try {
+      const response = await fetch('/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
       });
+      const data = await response.json();
+
+      console.log('response => ', response);
+      console.log('data => ', data);
+
+      if (response.status === 200) {
+        // data is true or false
+        setNameExists(data);
+
+        setTimeout(() => {
+          setNameExists(null);
+        }, 2000);
+      } else {
+        setWarn(true);
+
+        setTimeout(() => {
+          setWarn(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.log('Error in handleClick of SignUp component:', error);
+    }
   };
 
-  const styleNo = {
+  const styleRed = {
     color: 'red',
   };
-  const styleYes = {
+  const styleGreen = {
     color: 'green',
   };
 
   return (
-    <div className='signup'>
+    <div className="signup">
       <h1>Sign Up</h1>
 
-      <div className='redirect-to-signin'>
+      <div className="redirect-to-signin">
         <p>Already have an account?</p>
-        <Link to='/' className='link-signin'>
+        <Link to="/" className="link-signin">
           Sign In
         </Link>
       </div>
 
-      <form className='form-signup' onSubmit={handleSubmit}>
+      <form className="form-signup" onSubmit={handleSubmit}>
         <label>
           <span>Username</span>
-
-          <input type='text' value={username} onChange={handleUsername} />
-          {state ? (
-            <div>
-              <div style={styleNo}>username already exists!</div>
-
-              <button onClick={handleClick}>verify</button>
-            </div>
-          ) : (
-            <div>
-              {show ? null : <div style={styleYes}>you are all good!</div>}
-
-              <button onClick={handleClick}>verify</button>
-            </div>
-          )}
+          <input type="text" value={username} onChange={handleUsername} />
         </label>
 
         <label>
           <span>Password</span>
-          <input type='password' value={password} onChange={handlePassword} />
+          <input type="password" value={password} onChange={handlePassword} />
         </label>
-        <button className='btn btn-signup'>Sign Up</button>
+        <button className="btn btn-signup">Sign Up</button>
         {warn ? (
-          <p style={styleNo}>Sign Up Not Completed. Please Try Again</p>
+          <p style={styleRed}>Sign Up Not Completed. Please Try Again</p>
         ) : null}
       </form>
+      <div class="verify">
+        <button onClick={handleClick}>verify</button>
+        {nameExists === null ? null : nameExists ? (
+          <p style={styleRed}>username already exists!</p>
+        ) : (
+          <p style={styleGreen}>you are all good!</p>
+        )}
+      </div>
     </div>
   );
 };
