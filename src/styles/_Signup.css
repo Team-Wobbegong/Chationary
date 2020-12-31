@@ -1,10 +1,16 @@
-
 .signup {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: #1a1a1d;
+}
+
+.signup h1,
+span {
+  color: #d9d9d9;
 }
 
 .redirect-to-signin {
@@ -20,21 +26,35 @@
   align-items: center;
 }
 
-.redirect-to-signin .btn-signin {
-  background-color: #ffffff;
+.redirect-to-signin a {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #1a1a1d;
   color: #1c73e7;
   border: none;
+  outline: none;
+  margin: 0 20px;
+  padding: 10px 20px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.2s all;
+  cursor: default;
 }
 
-.redirect-to-signin .btn-signin:hover {
+.redirect-to-signin a:hover {
   background-color: #2081ff;
   color: #f8fafc;
 }
 
+.redirect-to-signin a:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 0 1px #f8fafc, 0 0 1px 2px #1c73e7;
+}
+
 .redirect-to-signin p {
-  color: #767676;
+  color: #d9d9d9;
   font-size: 16px;
-  font-weight: lighter;
 }
 
 .form-signup label {
@@ -54,9 +74,6 @@
 .form-signup label input {
   width: 340px;
   height: 40px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  box-shadow: rgb(214, 214, 214) 0px 0px 0px 1px inset;
 }
 
 button.btn-signup {

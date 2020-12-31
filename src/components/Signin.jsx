@@ -28,9 +28,11 @@ const Signin = ({ history }) => {
       if (response.status === 200) {
         console.log('Signed In!');
         //redirect to Home
-        history.push('/home');
+        history.push(`/join/${username}`);
       } else {
-        alert('Invalid Email Or Password. Please Try Again Or Go To Sign Up.');
+        alert(
+          'Invalid Username Or Password. Please Try Again Or Go To Sign Up.'
+        );
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignIn component:', error);

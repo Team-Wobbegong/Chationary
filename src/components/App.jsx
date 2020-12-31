@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Home';
+import Join from './Join';
 import Signin from './Signin';
 import Signup from './Signup';
 import Chat from './Chat';
@@ -15,7 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Signin} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/join/:name" component={Join} />
             <Route exact path="/chat/:name/:room" component={Chat} />
           </Switch>
         </div>

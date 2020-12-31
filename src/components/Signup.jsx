@@ -14,7 +14,7 @@ const Signup = ({ history }) => {
     console.log('body==>', body);
 
     try {
-      const response = await fetch('http://localhost:8080/api/signup', {
+      const response = await fetch('http://localhost:8080/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,9 +25,9 @@ const Signup = ({ history }) => {
       console.log(response);
 
       if (response.status === 200) {
-        ('Signed Up!');
+        console.log('Signed Up!');
         //redirect to Home
-        history.push('/home');
+        history.push(`/join/${username}`);
       } else {
         alert('Sign Up Not Completed. Please Try Again.');
       }
@@ -41,8 +41,8 @@ const Signup = ({ history }) => {
 
       <div className="redirect-to-signin">
         <p>Already have an account?</p>
-        <Link to="/" className="link-signup">
-          Sign Up
+        <Link to="/" className="link-signin">
+          Sign In
         </Link>
       </div>
 
