@@ -2,10 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useInputState from './useInputState';
+import useToggle from './useToggle';
 
 const Signup = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
+  const [state, toggle] = useToggle(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    console.log('username===>', username);
+
+    axios
+      .post('/auth/verify', { username })
+      .then((res) => {
+        console.log('response--->', res.data); // true or false
+        if (res.data) {
+          //..
+        } else {
+          //...
+        }
+      })
+      .catch((err) => {
+        console.log('err===>', err);
+      });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,27 +58,28 @@ const Signup = ({ history }) => {
     }
   };
   return (
-    <div className="signup">
+    <div className='signup'>
       <h1>Sign Up</h1>
 
-      <div className="redirect-to-signin">
+      <div className='redirect-to-signin'>
         <p>Already have an account?</p>
-        <Link to="/" className="link-signin">
+        <Link to='/' className='link-signin'>
           Sign In
         </Link>
       </div>
 
-      <form className="form-signup" onSubmit={handleSubmit}>
+      <form className='form-signup' onSubmit={handleSubmit}>
         <label>
           <span>Username</span>
-          <input type="text" value={username} onChange={handleUsername} />
+          <input type='text' value={username} onChange={handleUsername} />
+          <button onClick={handleClick}>verify</button>
         </label>
 
         <label>
           <span>Password</span>
-          <input type="password" value={password} onChange={handlePassword} />
+          <input type='password' value={password} onChange={handlePassword} />
         </label>
-        <button className="btn btn-signup">Sign Up</button>
+        <button className='btn btn-signup'>Sign Up</button>
       </form>
     </div>
   );
