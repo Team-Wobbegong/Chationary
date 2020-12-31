@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import useInputState from './useInputState';
 
 const Signin = ({ history }) => {
@@ -39,27 +38,27 @@ const Signin = ({ history }) => {
     }
   };
   return (
-    <div className="signin">
+    <div className='signin'>
       <h1>Sign In</h1>
 
-      <div className="redirect-to-signup">
+      <div className='redirect-to-signup'>
         <p>New to Chationary?</p>
-        <Link to="/signup" className="link-signup">
+        <Link to='/signup' className='link-signup'>
           Sign Up
         </Link>
       </div>
 
-      <form className="form-signin" onSubmit={handleSubmit}>
+      <form className='form-signin' onSubmit={handleSubmit}>
         <label>
           <span>Username</span>
-          <input type="text" value={username} onChange={handleUsername} />
+          <input type='text' value={username} onChange={handleUsername} />
         </label>
 
         <label>
           <span>Password</span>
-          <input type="password" value={password} onChange={handlePassword} />
+          <input type='password' value={password} onChange={handlePassword} />
         </label>
-        <button className="btn btn-signin">Sign In</button>
+        <button className='btn btn-signin'>Sign In</button>
       </form>
     </div>
   );
