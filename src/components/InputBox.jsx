@@ -35,14 +35,20 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
   return (
     <div className="inputBoxOuterContainer">
       <div className="emojiPicker">
-        {showEmojiPicker && <Picker set="apple" onSelect={addEmoji} />}
+        {showEmojiPicker && (
+          <Picker
+            set="apple"
+            title="Pick your emoji…"
+            emoji="point_up"
+            autoFocus="true"
+            enableFrequentEmojiSort="true"
+            style={{ position: 'absolute', bottom: '80px', right: '200px' }}
+            onSelect={addEmoji}
+          />
+        )}
       </div>
       <div className="inputBoxInnerContainer">
-        <div
-          className="emoji-icon"
-          type="button"
-          onClick={toggleShowEmojiPicker}
-        >
+        <div className="emoji-icon" onClick={toggleShowEmojiPicker}>
           <Smile />
         </div>
         <input
