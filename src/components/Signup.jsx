@@ -82,6 +82,7 @@ const Signup = ({ history }) => {
       <form className='form-signup' onSubmit={handleSubmit}>
         <label>
           <span>Username</span>
+
           <input type='text' value={username} onChange={handleUsername} />
           {state ? (
             <div>
