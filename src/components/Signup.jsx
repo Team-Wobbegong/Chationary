@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import useToggle from './useToggle';
+//import useToggle from './useToggle';
 import useInputState from './useInputState';
 
 const Signup = ({ history }) => {
@@ -9,6 +9,7 @@ const Signup = ({ history }) => {
   const [password, handlePassword] = useInputState('');
   const [state, setState] = useState(false);
   const [show, setShow] = useState(true);
+  const [warn, toggleWarn] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +33,8 @@ const Signup = ({ history }) => {
         //redirect to Home
         history.push(`/join/${username}`);
       } else {
-        alert('Sign Up Not Completed. Please Try Again.');
+        console.log(true);
+        toggleWarn(true);
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignUp component:', error);
@@ -104,6 +106,9 @@ const Signup = ({ history }) => {
           <input type='password' value={password} onChange={handlePassword} />
         </label>
         <button className='btn btn-signup'>Sign Up</button>
+        {warn ? (
+          <p style={styleNo}>Sign Up Not Completed. Please Try Again</p>
+        ) : null}
       </form>
     </div>
   );

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useInputState from './useInputState';
 
 const Signin = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,21 +22,23 @@ const Signin = ({ history }) => {
         body: JSON.stringify(body),
       });
 
-      console.log('response => ', response);
-      console.log('response.status => ', response.status);
+      //console.log('response => ', response);
+      //console.log('response.status => ', response.status);
 
       if (response.status === 200) {
         console.log('Signed In!');
         //redirect to Home
+
         history.push(`/join/${username}`);
       } else {
-        alert(
-          'Invalid Username Or Password. Please Try Again Or Go To Sign Up.'
-        );
+        setShow(true);
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignIn component:', error);
     }
+  };
+  const styleNo = {
+    color: 'red',
   };
   return (
     <div className='signin'>
@@ -59,6 +62,11 @@ const Signin = ({ history }) => {
           <input type='password' value={password} onChange={handlePassword} />
         </label>
         <button className='btn btn-signin'>Sign In</button>
+        {show ? (
+          <p style={styleNo}>
+            Invalid Username Or Password. Please Try Again Or Go To Sign Up.
+          </p>
+        ) : null}
       </form>
     </div>
   );
