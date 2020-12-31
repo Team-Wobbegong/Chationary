@@ -120,6 +120,7 @@ const io = socketio(server);
 io.on('connection', (socket) => {
   console.log('socket.id => ', socket.id);
   const { name, room } = socket.handshake.query;
+  console.log(io.engine.clientsCount);
 
   console.log('before joining room => socket.rooms => ', socket.rooms);
   socket.join(room);
