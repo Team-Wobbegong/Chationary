@@ -6,6 +6,8 @@
 @import '_Message';
 @import '_inputBox';
 @import '_VocabAPI';
+@import '_Signup';
+@import '_Signin';
 
 * {
   box-sizing: border-box;

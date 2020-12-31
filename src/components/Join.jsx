@@ -3,22 +3,15 @@ import { Link } from 'react-router-dom';
 import { Chatrooms } from './Chatrooms';
 import useInputState from './useInputState';
 
-const Home = () => {
-  const [name, handleChangeName] = useInputState('');
+const Join = ({match}) => {
+  const { name } = match.params;
+
   const [room, handleChangeRoom] = useInputState('');
 
   return (
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">
         <h1 className="heading">Welcome</h1>
-        <>
-          <input
-            placeholder="Name"
-            className="homeInput"
-            type="text"
-            onChange={handleChangeName}
-          />
-        </>
         <>
           <select
             className="homeInput"
@@ -52,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Join;
