@@ -96,10 +96,10 @@ userController.checkUser = async (req, res, next) => {
     console.log('data.rows[0] => ', data.rows[0]);
 
     if (!data.rows[0]) {
-      res.locals.nameExists = true;
+      res.locals.nameExists = false;
       return next();
     } else {
-      res.locals.nameExists = false;
+      res.locals.nameExists = true;
       return next();
     }
   } catch (err) {

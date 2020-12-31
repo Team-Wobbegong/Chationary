@@ -1,33 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import useInputState from './useInputState';
 import useToggle from './useToggle';
+import useInputState from './useInputState';
 
 const Signup = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
-  const [state, toggle] = useToggle(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    console.log('username===>', username);
-
-    axios
-      .post('/auth/verify', { username })
-      .then((res) => {
-        console.log('response--->', res.data); // true or false
-        if (res.data) {
-          //..
-        } else {
-          //...
-        }
-      })
-      .catch((err) => {
-        console.log('err===>', err);
-      });
-  };
+  const [state, setState] = useState(false);
+  const [show, setShow] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +38,36 @@ const Signup = ({ history }) => {
       console.log('Error in handleSubmit of SignUp component:', error);
     }
   };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    console.log('username===>', username);
+
+    axios
+      .post('/auth/verify', { username })
+      .then((res) => {
+        console.log('res.data===>', res.data);
+        // true or false
+        if (res.data) {
+          setState(res.data);
+        } else {
+          setState(res.data);
+          setShow(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log('err===>', err);
+      });
+  };
+
+  const styleNo = {
+    color: 'red',
+  };
+  const styleYes = {
+    color: 'green',
+  };
+
   return (
     <div className='signup'>
       <h1>Sign Up</h1>
@@ -72,7 +83,19 @@ const Signup = ({ history }) => {
         <label>
           <span>Username</span>
           <input type='text' value={username} onChange={handleUsername} />
-          <button onClick={handleClick}>verify</button>
+          {state ? (
+            <div>
+              <div style={styleNo}>username already exists!</div>
+
+              <button onClick={handleClick}>verify</button>
+            </div>
+          ) : (
+            <div>
+              {show ? null : <div style={styleYes}>you are all good!</div>}
+
+              <button onClick={handleClick}>verify</button>
+            </div>
+          )}
         </label>
 
         <label>
