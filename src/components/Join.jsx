@@ -16,12 +16,11 @@ const Join = ({ match }) => {
       });
       console.log('response => ', response);
 
-      const data = response.data;
-      console.log('data => ', data);
-
-      setUsersCountByRoom(data);
+      const usersCountByRoom = response.data;
 
       console.log('usersCountByRoom => ', usersCountByRoom);
+
+      setUsersCountByRoom([...usersCountByRoom]);
     } catch (error) {
       console.log('Error in getActiveRooms of Join component:', error);
     }

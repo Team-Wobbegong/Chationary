@@ -117,7 +117,7 @@ const server = app.listen(PORT, () => {
 });
 
 // Display for rooms;
-let usersCountByRoom = [
+const usersCountByRoom = [
   { roomName: 'English', userCount: 0 },
   { roomName: 'French', userCount: 0 },
   { roomName: 'Spanish', userCount: 0 },
