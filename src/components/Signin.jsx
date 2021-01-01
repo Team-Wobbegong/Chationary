@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import useInputState from './useInputState';
 
 const Signin = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
+  const [warn, setWarn] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const Signin = ({ history }) => {
     console.log('body==>', body);
 
     try {
-      const response = await fetch('http://localhost:8080/auth/signin', {
+      const response = await fetch('/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,21 +22,25 @@ const Signin = ({ history }) => {
         body: JSON.stringify(body),
       });
 
-      console.log('response => ', response);
-      console.log('response.status => ', response.status);
+      //console.log('response => ', response);
 
       if (response.status === 200) {
         console.log('Signed In!');
         //redirect to Home
         history.push(`/join/${username}`);
       } else {
-        alert(
-          'Invalid Username Or Password. Please Try Again Or Go To Sign Up.'
-        );
+        setWarn(true);
+
+        setTimeout(() => {
+          setWarn(false);
+        }, 2000);
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignIn component:', error);
     }
+  };
+  const styleRed = {
+    color: 'red',
   };
   return (
     <div className="signin">
@@ -60,6 +64,11 @@ const Signin = ({ history }) => {
           <input type="password" value={password} onChange={handlePassword} />
         </label>
         <button className="btn btn-signin">Sign In</button>
+        {warn && (
+          <p style={styleRed}>
+            Invalid Username Or Password. Please Try Again Or Go To Sign Up.
+          </p>
+        )}
       </form>
     </div>
   );

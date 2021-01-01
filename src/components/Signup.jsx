@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useInputState from './useInputState';
@@ -6,6 +6,8 @@ import useInputState from './useInputState';
 const Signup = ({ history }) => {
   const [username, handleUsername] = useInputState('');
   const [password, handlePassword] = useInputState('');
+  const [warn, setWarn] = useState(false);
+  const [nameExists, setNameExists] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ const Signup = ({ history }) => {
     console.log('body==>', body);
 
     try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
+      const response = await fetch('/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,12 +31,58 @@ const Signup = ({ history }) => {
         //redirect to Home
         history.push(`/join/${username}`);
       } else {
-        alert('Sign Up Not Completed. Please Try Again.');
+        setWarn(true);
+        setTimeout(() => {
+          setWarn(false);
+        }, 2000);
       }
     } catch (error) {
       console.log('Error in handleSubmit of SignUp component:', error);
     }
   };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    const body = { username };
+    console.log('body==>', body);
+
+    try {
+      const response = await fetch('/auth/checkusername', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+
+      console.log('response => ', response);
+      console.log('data => ', data);
+
+      if (response.status === 200) {
+        // data is true or false
+        setNameExists(data);
+
+        setTimeout(() => {
+          setNameExists(null);
+        }, 2000);
+      } else {
+        setWarn(true);
+
+        setTimeout(() => {
+          setWarn(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.log('Error in handleClick of SignUp component:', error);
+    }
+  };
+
+  const styleRed = {
+    color: 'red',
+  };
+
   return (
     <div className="signup">
       <h1>Sign Up</h1>
@@ -52,11 +100,23 @@ const Signup = ({ history }) => {
           <input type="text" value={username} onChange={handleUsername} />
         </label>
 
+        <div class="checkUsername">
+          <button onClick={handleClick}>Check Availability</button>
+          {nameExists === null ? null : nameExists ? (
+            <img src={'../assets/images/x.png'} />
+          ) : (
+            <img src={'../assets/images/checkmark.png'} />
+          )}
+        </div>
+
         <label>
           <span>Password</span>
           <input type="password" value={password} onChange={handlePassword} />
         </label>
         <button className="btn btn-signup">Sign Up</button>
+        {warn ? (
+          <p style={styleRed}>Sign Up Not Completed. Please Try Again</p>
+        ) : null}
       </form>
     </div>
   );

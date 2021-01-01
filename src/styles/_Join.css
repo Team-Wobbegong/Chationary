@@ -1,11 +1,13 @@
 .homeOuterContainer {
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
-  align-items: center;
   background-color: #1a1a1d;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100vh;
+  padding-top: 180px;
 }
 
 .homeInnerContainer {
