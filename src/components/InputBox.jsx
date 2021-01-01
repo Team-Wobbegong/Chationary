@@ -42,7 +42,7 @@ const InputBox = ({ sendNewMessage, sendTypingMsg }) => {
             emoji="point_up"
             autoFocus="true"
             enableFrequentEmojiSort="true"
-            style={{ position: 'absolute', bottom: '80px', right: '200px' }}
+            style={{ position: 'absolute', bottom: '80px', right: '300px' }}
             onSelect={addEmoji}
           />
         )}
