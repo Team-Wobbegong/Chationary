@@ -66,7 +66,35 @@ userController.verifyUser = async (req, res, next) => {
     console.log('isMatch => ', isMatch);
     if (!isMatch) return res.sendStatus(401);
 
-    // res.locals.id = data.rows[0].id;
+    return next();
+  } catch (err) {
+    return next({
+      log: `userController: Unable to verify user data with verifyUser`,
+      message: {
+        err: `userController.verifyUser: ERROR: ${err}`,
+      },
+    });
+  }
+};
+
+userController.checkUsername = async (req, res, next) => {
+  console.log('req.body => ', req.body);
+  const { username } = req.body;
+
+  if (!username) return res.sendStatus(401);
+
+  try {
+    const text = `
+        SELECT *
+        from profiles
+        WHERE profiles.username = $1
+      ;`;
+    const values = [username];
+
+    const data = await db.query(text, values);
+    console.log('data.rows[0] => ', data.rows[0]);
+
+    res.locals.nameExists = data.rows[0] ? true : false;
     return next();
   } catch (err) {
     return next({
