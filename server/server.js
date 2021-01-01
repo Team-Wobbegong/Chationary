@@ -38,8 +38,8 @@ app.use(express.static(path.join(__dirname, '../src')));
 app.use('/auth', authRouter);
 
 app.get('/activerooms', (req, res) => {
-  console.log(usersByRoom);
-  res.status(200).json(usersByRoom);
+  console.log('get request response => usersCountByRoom => ', usersCountByRoom)
+  res.status(200).json(usersCountByRoom);
 });
 
 // Oxford Dictionaries API
@@ -117,7 +117,7 @@ const server = app.listen(PORT, () => {
 });
 
 // Display for rooms;
-let usersByRoom = [
+let usersCountByRoom = [
   { roomName: 'English', userCount: 0 },
   { roomName: 'French', userCount: 0 },
   { roomName: 'Spanish', userCount: 0 },
@@ -126,15 +126,17 @@ let usersByRoom = [
 
 // Helper functions
 const incrementCount = (roomName) => {
-  return usersByRoom.forEach((room) => {
+  usersCountByRoom.forEach((room) => {
     if (room.roomName === roomName) room.userCount++;
   });
+  return;
 };
 
 const decrementCount = (roomName) => {
-  return usersByRoom.forEach((room) => {
+  usersCountByRoom.forEach((room) => {
     if (room.roomName === roomName) room.userCount--;
   });
+  return;
 };
 
 const checkActiveRoom = (roomName, status) => {
@@ -158,7 +160,7 @@ io.on('connection', (socket) => {
   console.log('After joining room => ', socket.rooms);
 
   checkActiveRoom(room, 'connect');
-  console.log('usersByRoom => ', usersByRoom);
+  console.log('on connect usersCountByRoom => ', usersCountByRoom);
 
   socket.emit('message', {
     id: socket.id,
@@ -188,7 +190,7 @@ io.on('connection', (socket) => {
     socket.leave(room);
 
     checkActiveRoom(room, 'disconnect');
-    console.log('usersByRoom => ', usersByRoom);
+    console.log('on disconnect usersCountByRoom => ', usersCountByRoom);
 
     socket.to(room).emit('message', {
       id: socket.id,

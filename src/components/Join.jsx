@@ -7,7 +7,7 @@ import axios from 'axios';
 const Join = ({ match }) => {
   const { name } = match.params;
   const [room, handleChangeRoom] = useInputState('');
-  const [usersByRoom, setUsersByRoom] = useState([]);
+  const [usersCountByRoom, setUsersCountByRoom] = useState([]);
 
   const getActiveRooms = async () => {
     try {
@@ -19,16 +19,16 @@ const Join = ({ match }) => {
       const data = response.data;
       console.log('data => ', data);
 
-      setUsersByRoom(data);
+      setUsersCountByRoom(data);
 
-      console.log('usersByRoom => ', usersByRoom);
+      console.log('usersCountByRoom => ', usersCountByRoom);
     } catch (error) {
       console.log('Error in getActiveRooms of Join component:', error);
     }
   };
 
   useEffect(() => {
-    console.log('useEffect in join component fired');
+    console.log('useEffect in Join Component fired');
     getActiveRooms();
   }, []);
 
@@ -65,23 +65,25 @@ const Join = ({ match }) => {
           </Link>
         </>
         <>
-          <div className="usersByRoom">
-            <div>
-              {usersByRoom.some((room) => room.userCount !== 0)
+          <div className="usersCountByRoom">
+            <div className="usersCountByRoom-heading">
+              {usersCountByRoom.some((room) => room.userCount !== 0)
                 ? 'Active Chatrooms'
                 : null}
             </div>
-            <div>
-              {usersByRoom.map((room) =>
+            <div className="usersCountByRoom-content">
+              {usersCountByRoom.map((room, i) =>
                 room.userCount ? (
-                  <div className="room">
+                  <div key={`room-${i}`} className="room">
                     <img
                       alt="Online Icon"
                       src={'../assets/images/onlineIcon.png'}
                     />
-                    {`${room.roomName}: ${room.userCount} ${
-                      room.userCount === 1 ? 'user' : 'users'
-                    }`}
+                    <>
+                      {`${room.roomName}: ${room.userCount} ${
+                        room.userCount === 1 ? 'user' : 'users'
+                      }`}
+                    </>
                   </div>
                 ) : null
               )}

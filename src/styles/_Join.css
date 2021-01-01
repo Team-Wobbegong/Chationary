@@ -19,12 +19,12 @@
   border-bottom: 2px solid #d9d9d9;
 }
 
-.usersByRoom {
+.usersCountByRoom {
   color: #d9d9d9;
   margin-top: 30px;
 }
 
-.usersByRoom div {
+.usersCountByRoom div {
   margin: 15px;
 }
 
