@@ -33,6 +33,12 @@ const useSocket = (name, room) => {
       }, 1000);
     });
 
+    socket.on('getAllRooms', (activeUsers) => {
+      Object.keys(activeUsers).forEach((roomName) => {
+        console.log(roomName, activeUsers[roomName]);
+      });
+    });
+
     // Destroys the socket reference
     // when the connection is closed
     return () => {
