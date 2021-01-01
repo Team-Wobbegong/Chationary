@@ -69,7 +69,7 @@ const Join = ({ match }) => {
             <div className="usersCountByRoom-heading">
               {usersCountByRoom.some((room) => room.userCount !== 0)
                 ? 'Active Chatrooms'
-                : null}
+                : 'You are the first one here!'}
             </div>
             <div className="usersCountByRoom-content">
               {usersCountByRoom.map((room, i) =>
@@ -81,7 +81,7 @@ const Join = ({ match }) => {
                     />
                     <>
                       {`${room.roomName}: ${room.userCount} ${
-                        room.userCount === 1 ? 'user' : 'users'
+                        room.userCount === 1 ? 'User' : 'Users'
                       }`}
                     </>
                   </div>

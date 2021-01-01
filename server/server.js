@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, '../src')));
 app.use('/auth', authRouter);
 
 app.get('/activerooms', (req, res) => {
-  console.log('get request response => usersCountByRoom => ', usersCountByRoom)
+  console.log('get request response => usersCountByRoom => ', usersCountByRoom);
   res.status(200).json(usersCountByRoom);
 });
 
@@ -124,19 +124,17 @@ let usersCountByRoom = [
   { roomName: 'German', userCount: 0 },
 ];
 
-// Helper functions
+// usersCountByRoom Helper functions
 const incrementCount = (roomName) => {
   usersCountByRoom.forEach((room) => {
     if (room.roomName === roomName) room.userCount++;
   });
-  return;
 };
 
 const decrementCount = (roomName) => {
   usersCountByRoom.forEach((room) => {
     if (room.roomName === roomName) room.userCount--;
   });
-  return;
 };
 
 const checkActiveRoom = (roomName, status) => {
