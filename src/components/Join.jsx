@@ -69,7 +69,7 @@ const Join = ({ match }) => {
             <div className="usersCountByRoom-heading">
               {usersCountByRoom.some((room) => room.userCount !== 0)
                 ? 'Active Chatrooms'
-                : 'You are the first one here!'}
+                : null}
             </div>
             <div className="usersCountByRoom-content">
               {usersCountByRoom.map((room, i) =>
