@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chatrooms } from './Chatrooms';
 import useInputState from './useInputState';
-import Axios from 'axios';
+import axios from 'axios';
 
-const Join = ({match}) => {
+const Join = ({ match }) => {
   const { name } = match.params;
   const [room, handleChangeRoom] = useInputState('');
   const [activeRoom, setActiveRoom] = useState([]);
@@ -12,46 +12,44 @@ const Join = ({match}) => {
 
   const getActiveRooms = async () => {
     try {
-      const response = await Axios.get('/activerooms', {
+      const response = await axios.get('/activerooms', {
         header: { 'Content-Type': 'Application/JSON' },
-      })
-      console.log(response)
-      const data = response.data
-      console.log(data);
-      console.log(Object.entries(data))
+      });
+      console.log('response => ', response);
+
+      const data = response.data;
+      console.log('data => ', data);
+
+      console.log(Object.entries(data));
       for (const [roomName, count] of Object.entries(data)) {
-        console.log(roomName)
-        console.log(count)
-        setActiveRoom(activeRoom => [...activeRoom, roomName]);
-        setUserCount(userCount => [...userCount, count]);
+        console.log('roomName => ', roomName);
+        console.log('count => ', count);
+        setActiveRoom((activeRoom) => [...activeRoom, roomName]);
+        setUserCount((userCount) => [...userCount, count]);
       }
-      console.log(activeRoom)
-      console.log(userCount)
+      console.log(activeRoom);
+      console.log(userCount);
     } catch (err) {
-      console.log(`Error: in get request /activerooms, ${err}`)
+      console.log(`Error: in get request /activerooms, ${err}`);
     }
-  }
+  };
 
   useEffect(() => {
-    console.log('useEffect in join component fired')
+    console.log('useEffect in join component fired');
     getActiveRooms();
-  }, [])
+  }, []);
 
   return (
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">
         <h1 className="heading">Welcome</h1>
-        <div style={{color: 'white'}}>Active Chatrooms:</div>
-        <div style={{color: 'white'}}>
+        <div style={{ color: 'white' }}>Active Chatrooms:</div>
+        <div style={{ color: 'white' }}>
           {activeRoom.map((room) => (
-            <p>
-              {room}
-            </p>
+            <p>{room}</p>
           ))}
           {userCount.map((count) => (
-            <p>
-              {count}
-            </p>
+            <p>{count}</p>
           ))}
         </div>
         <>

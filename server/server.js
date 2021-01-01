@@ -50,8 +50,8 @@ const strictMatch = 'false';
 
 app.get('/activerooms', (req, res) => {
   console.log(usersByRoom);
-  res.status(200).json(usersByRoom)
-})
+  res.status(200).json(usersByRoom);
+});
 
 app.post('/dictionary', (req, res) => {
   let definition = 'Sorry, we cannot find this word';
@@ -125,18 +125,18 @@ const server = app.listen(PORT, () => {
 const socketio = require('socket.io');
 const io = socketio(server);
 const checkActiveRoom = (roomName, status) => {
-  if (!usersByRoom[roomName]) return usersByRoom[roomName] = 1;
+  if (!usersByRoom[roomName]) return (usersByRoom[roomName] = 1);
   else if (status === 'connect') return incrementCount(roomName);
   else if (status === 'disconnect') return decrementCount(roomName);
-}
+};
 
 const incrementCount = (roomName) => {
   return usersByRoom[roomName]++;
-}
+};
 
 const decrementCount = (roomName) => {
   return usersByRoom[roomName]--;
-}
+};
 
 io.on('connection', (socket) => {
   console.log('socket.id => ', socket.id);
@@ -145,7 +145,7 @@ io.on('connection', (socket) => {
   console.log('before joining room => socket.rooms => ', socket.rooms);
   socket.join(room);
   checkActiveRoom(room, 'connect');
-  console.log(usersByRoom);
+  console.log('usersByRoom => ', usersByRoom);
   console.log('After joining room => ', socket.rooms);
 
   socket.emit('message', {
@@ -174,8 +174,10 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     socket.leave(room);
+
     checkActiveRoom(room, 'disconnect');
-    console.log(usersByRoom);
+    console.log('usersByRoom => ', usersByRoom);
+
     socket.to(room).emit('message', {
       id: socket.id,
       name: 'Admin',
