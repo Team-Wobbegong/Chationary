@@ -48,7 +48,7 @@ const Signup = ({ history }) => {
     console.log('body==>', body);
 
     try {
-      const response = await fetch('/auth/verify', {
+      const response = await fetch('/auth/checkusername', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,9 +82,6 @@ const Signup = ({ history }) => {
   const styleRed = {
     color: 'red',
   };
-  const styleGreen = {
-    color: 'green',
-  };
 
   return (
     <div className="signup">
@@ -103,6 +100,15 @@ const Signup = ({ history }) => {
           <input type="text" value={username} onChange={handleUsername} />
         </label>
 
+        <div class="checkUsername">
+          <button onClick={handleClick}>Check Availability</button>
+          {nameExists === null ? null : nameExists ? (
+            <img src={'../assets/images/x.png'} />
+          ) : (
+            <img src={'../assets/images/checkmark.png'} />
+          )}
+        </div>
+
         <label>
           <span>Password</span>
           <input type="password" value={password} onChange={handlePassword} />
@@ -112,14 +118,6 @@ const Signup = ({ history }) => {
           <p style={styleRed}>Sign Up Not Completed. Please Try Again</p>
         ) : null}
       </form>
-      <div class="verify">
-        <button onClick={handleClick}>verify</button>
-        {nameExists === null ? null : nameExists ? (
-          <p style={styleRed}>username already exists!</p>
-        ) : (
-          <p style={styleGreen}>you are all good!</p>
-        )}
-      </div>
     </div>
   );
 };

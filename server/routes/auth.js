@@ -10,7 +10,7 @@ router.post('/signin', userController.verifyUser, (req, res) => {
   return res.sendStatus(200);
 });
 
-router.post('/verify', userController.checkUsername, (req, res) => {
+router.post('/checkusername', userController.checkUsername, (req, res) => {
   return res.status(200).json(res.locals.nameExists);
 });
 

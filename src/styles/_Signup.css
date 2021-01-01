@@ -81,12 +81,22 @@ button.btn-signup {
   width: 340px;
 }
 
-.verify {
-  position: absolute;
-  top: 364px;
-  left: 850px;
+.checkUsername {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.verify button {
-  width: 85px;
+.checkUsername button {
+  margin: 6px;
+  width: 160px;
+  font-size: 12px;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.checkUsername img {
+  width: 20px;
+  height: 20px;
 }
