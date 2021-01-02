@@ -8,6 +8,7 @@
 @import '_VocabAPI';
 @import '_Signup';
 @import '_Signin';
+@import '_About';
 
 * {
   box-sizing: border-box;
